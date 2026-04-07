@@ -84,7 +84,6 @@ npm run lint
 ├── hooks/
 ├── public/
 │   ├── atulfullstackresume.pdf
-│   ├── ss.png
 │   └── ...
 ├── package.json
 └── README.md
@@ -103,7 +102,6 @@ npm run lint
 
 Static assets are stored in `public/`, including:
 
-- Preview image
 - Resume PDF
 - School logos
 - Personal/project images
