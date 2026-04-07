@@ -243,7 +243,7 @@ export default function About() {
                     <Linkedin className="w-4 h-4 text-subtext group-hover:text-primary" />
                   </div>
                 </a>
-                <a href="mailto:xuanvan.info@gmail.com" className="group">
+                <a href="mailto:nguyenxuanvan.work@gmail.com" className="group">
                   <div className="w-10 h-10 rounded-xl bg-border/50 border border-border flex items-center justify-center hover:border-primary transition-all duration-300 hover:scale-110 hover:bg-primary/10">
                     <Mail className="w-4 h-4 text-subtext group-hover:text-primary" />
                   </div>

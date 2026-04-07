@@ -36,7 +36,7 @@ export default function Contact() {
   };
 
   const copyEmail = () => {
-    navigator.clipboard.writeText('xuanvan.info@gmail.com');
+    navigator.clipboard.writeText('nguyenxuanvan.work@gmail.com');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -46,8 +46,8 @@ export default function Contact() {
       id: 'email',
       icon: Mail,
       label: 'Email',
-      value: 'xuanvan.info@gmail.com',
-      href: 'mailto:xuanvan.info@gmail.com',
+      value: 'nguyenxuanvan.work@gmail.com',
+      href: 'mailto:nguyenxuanvan.work@gmail.com',
       gradient: 'from-blue-100 to-blue-200',
       description: 'Send me a message',
       action: copyEmail

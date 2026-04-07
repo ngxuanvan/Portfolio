@@ -20,7 +20,7 @@ export default function Footer() {
     { icon: Linkedin, href: 'https://www.linkedin.com/in/xuanvan/', label: 'LinkedIn', username: '/in/xuanvan' },
     { icon: FileText, href: '/atulfullstackresume.pdf', label: 'Resume', username: 'profile summary' },
     { icon: Github, href: 'https://github.com/ngxuanvan', label: 'GitHub', username: '@ngxuanvan' },
-    { icon: Mail, href: 'mailto:xuanvan.info@gmail.com', label: 'Email', username: 'xuanvan.info' },
+    { icon: Mail, href: 'mailto:nguyenxuanvan.work@gmail.com', label: 'Email', username: 'nguyenxuanvan.work' },
   ];
 
   // Fixed particles for footer
