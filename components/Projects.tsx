@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { Award, Compass, Shield } from 'lucide-react';
+import { Award, Compass, MonitorSmartphone, Shield } from 'lucide-react';
 
 const ProjectsSection: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
@@ -17,52 +17,72 @@ const ProjectsSection: React.FC = () => {
 
   const projects = [
     {
+      title: "Personal Portfolio Website",
+      summary: "A personal portfolio designed to present education, business-analysis direction, selected work, and contact details in a polished single-page experience.",
+      problem: "A generic portfolio would not clearly communicate career direction, strengths, and project thinking for a Business Analyst-oriented profile.",
+      approach: "Structured the site around clear storytelling sections, improved content hierarchy, and aligned the interface with a more professional ITBA presentation style.",
+      impact: "Clearer personal branding | Stronger first impression | Better project presentation | Easier recruiter navigation",
+      link: "https://portfolio-blond-zeta-56.vercel.app/",
+      icon: MonitorSmartphone,
+      gradient: "from-primary to-primary-light",
+      metrics: [
+        { label: "Type", value: "Portfolio", color: "blue" },
+        { label: "Focus", value: "ITBA", color: "purple" },
+        { label: "Goal", value: "Present", color: "pink" }
+      ],
+      tech: ["UX Thinking", "Content Structure", "Personal Branding", "Responsive UI"],
+      tags: ["PORTFOLIO", "BRANDING", "UX"]
+    },
+    {
       title: "VeriTrust Pro",
-      summary: "Decentralized credential verification platform for issuing, managing, and verifying certificates in a secure, tamper-proof, and privacy-preserving way",
-      problem: "Traditional certificates are vulnerable to forgery and lack a transparent verification mechanism",
-      approach: "Built with Ethereum blockchain, Solidity smart contracts, and Web3.js for decentralized certificate issuance and verification",
-      impact: "Tamper-proof credentials | Instant verification | Privacy-preserving | Transparent blockchain records",
+      summary: "A credential verification platform concept focused on trust, transparency, and a smoother verification experience for institutions and users.",
+      problem: "Traditional certificate verification is slow, fragmented, and vulnerable to forgery, creating trust issues for both issuers and verifiers.",
+      approach: "Analyzed the verification flow, identified trust gaps, and translated the problem into a blockchain-supported solution with clear issuance and validation steps.",
+      impact: "Clearer verification flow | Reduced trust friction | More transparent records | Better user confidence",
       link: "https://github.com/atuljha-tech/VeriTrust-Pro",
       icon: Award,
       gradient: "from-primary via-primary-light to-primary",
       metrics: [
-        { label: "Smart Contracts", value: "3+", color: "blue" },
-        { label: "Blockchain", value: "Ethereum", color: "purple" },
-        { label: "Security", value: "SHA-256", color: "pink" }
+        { label: "Focus", value: "Trust", color: "blue" },
+        { label: "Users", value: "Issuers", color: "purple" },
+        { label: "Goal", value: "Verify", color: "pink" }
       ],
-      tech: ["Solidity", "Web3.js", "Ethereum", "React", "IPFS"]
+      tech: ["Requirements", "Flow Design", "Blockchain", "Validation"],
+      tags: ["TRUST", "PROCESS", "VALIDATION"]
     },
     {
       title: "ForenChain",
-      summary: "Full-stack decentralized web application ensuring integrity and immutability of forensic scan reports using Ethereum Blockchain and SHA-256 hashing",
-      problem: "Cybersecurity evidence and forensic reports are vulnerable to tampering, compromising legal and investigative integrity",
-      approach: "SHA-256 hashing + Ethereum blockchain storage + React frontend for secure forensic evidence management",
-      impact: "Tamper-proof evidence | Verifiable chain of custody | Immutable records | Cybersecurity grade",
+      summary: "A forensic evidence management concept designed to preserve report integrity and improve confidence in sensitive digital records.",
+      problem: "Forensic reports and cybersecurity evidence can be altered or questioned, weakening reliability in investigation and review processes.",
+      approach: "Mapped the evidence-handling process, identified risk points, and structured a solution around integrity, traceability, and secure record management.",
+      impact: "Stronger evidence handling | Better traceability | Reduced integrity risk | More dependable review process",
       link: "https://github.com/atuljha-tech/ForeChainWeb",
       icon: Shield,
       gradient: "from-primary via-primary to-primary-light",
       metrics: [
-        { label: "Hashing", value: "SHA-256", color: "purple" },
-        { label: "Network", value: "Ethereum", color: "pink" },
-        { label: "Evidence", value: "100%", color: "blue" }
+        { label: "Focus", value: "Integrity", color: "purple" },
+        { label: "Process", value: "Traceable", color: "pink" },
+        { label: "Records", value: "Secure", color: "blue" }
       ],
-      tech: ["Solidity", "Ethereum", "SHA-256", "React", "Node.js"]
+      tech: ["Analysis", "Risk Review", "System Flow", "Traceability"],
+      tags: ["INTEGRITY", "RISK", "TRACEABILITY"]
     },
     {
       title: "Jharkhand Tourism Guide",
-      summary: "Smart Travel Assistant with AI chatbot, live weather updates, and interactive maps for exploring Jharkhand's waterfalls and natural wonders",
-      problem: "Travelers lack a centralized platform with AI assistance for discovering and planning trips to Jharkhand's remote natural attractions",
-      approach: "Next.js + MongoDB + Gemini AI for chatbot, integrated weather API, and interactive maps for seamless exploration",
-      impact: "AI-powered travel assistant | Real-time weather | Interactive maps | 100+ attractions mapped",
+      summary: "A travel support platform concept that brings together destination discovery, planning support, and helpful trip information in one place.",
+      problem: "Travelers often struggle to find reliable, centralized information when planning visits to remote attractions and natural destinations.",
+      approach: "Focused on user needs, grouped key planning tasks, and shaped the platform around easier discovery, decision-making, and travel preparation.",
+      impact: "More convenient planning | Better information access | Easier destination discovery | Improved user experience",
       link: "https://jharkhandtourism-a3dh60lge-atuljha275-2203s-projects.vercel.app/",
       icon: Compass,
       gradient: "from-primary-light via-primary to-primary-light",
       metrics: [
-        { label: "AI Chatbot", value: "Gemini", color: "pink" },
-        { label: "Attractions", value: "100+", color: "blue" },
-        { label: "Live Weather", value: "Real-time", color: "purple" }
+        { label: "Users", value: "Travelers", color: "pink" },
+        { label: "Scope", value: "Planning", color: "blue" },
+        { label: "Value", value: "Guidance", color: "purple" }
       ],
-      tech: ["Next.js", "MongoDB", "Gemini AI", "Tailwind", "Weather API"]
+      tech: ["User Needs", "Research", "Information Flow", "UX Thinking"],
+      tags: ["RESEARCH", "USER NEEDS", "UX"]
     }
   ];
 
@@ -122,14 +142,14 @@ const ProjectsSection: React.FC = () => {
           </div>
           
           <h2 className="text-5xl sm:text-7xl font-black text-foreground mb-6 tracking-tight">
-            Full Stack
+            Project
             <span className="relative inline-block ml-4 text-primary-dark">
-              Creations
+              Case Studies
             </span>
           </h2>
 
           <p className="text-subtext text-lg max-w-2xl mx-auto font-light">
-            Case studies presented with problem, approach, and outcome for an ITBA-style portfolio
+            Selected work presented through problem, approach, and outcome with a business-analysis perspective
           </p>
         </motion.div>
 
@@ -306,9 +326,14 @@ const ProjectsSection: React.FC = () => {
                         </a>
                       </div>
                       <div className="flex gap-2">
-                        <span className="text-[10px] px-2 py-1 rounded-full bg-border/40 text-subtext font-mono">ANALYSIS</span>
-                        <span className="text-[10px] px-2 py-1 rounded-full bg-border/40 text-subtext font-mono">FLOW</span>
-                        <span className="text-[10px] px-2 py-1 rounded-full bg-border/40 text-subtext font-mono">DATA</span>
+                        {project.tags.map((tag, i) => (
+                          <span
+                            key={i}
+                            className="text-[10px] px-2 py-1 rounded-full bg-border/40 text-subtext font-mono"
+                          >
+                            {tag}
+                          </span>
+                        ))}
                       </div>
                     </div>
                   </div>
@@ -346,7 +371,7 @@ const ProjectsSection: React.FC = () => {
           </div>
           
           <p className="mt-8 text-xs text-subtext font-mono tracking-[0.3em]">
-            • BLOCKCHAIN • CYBERSECURITY • AI • FULL STACK •
+            • ANALYSIS • USER NEEDS • PROCESS • SOLUTION THINKING •
           </p>
         </motion.div>
       </div>
