@@ -36,10 +36,10 @@ export default function About() {
   }, [])
 
   const achievements = [
-    { icon: GraduationCap, value: '8.9 CGPA', label: '1st Year', color: 'blue', emoji: '📚', description: 'Academic Excellence' },
-    { icon: Medal, value: '95%', label: '10th Grade', color: 'purple', emoji: '🏆', description: 'School Topper' },
-    { icon: Award, value: '91%', label: '12th Grade', color: 'pink', emoji: '🎓', description: 'Science Stream' },
-    { icon: Users, value: '2028', label: 'Graduation', color: 'blue', emoji: '🚀', description: 'Batch of 2028' },
+    { icon: GraduationCap, value: '3.6/4.0', label: 'UEH GPA', color: 'blue', emoji: '📘', description: 'Bachelor of E-commerce' },
+    { icon: Medal, value: '8.2/10', label: 'FPT GPA', color: 'purple', emoji: '🎓', description: 'Associate Degree in E-commerce' },
+    { icon: Award, value: '2+', label: 'E-commerce Projects', color: 'pink', emoji: '🛒', description: 'Academic and team-led websites' },
+    { icon: Users, value: '4 Months', label: 'SEO Experience', color: 'blue', emoji: '📈', description: 'SEO Specialist (BA-oriented)' },
   ]
 
   const education = [
@@ -203,7 +203,7 @@ export default function About() {
               <div className="flex items-center gap-2 mb-3">
                 <h3 className="text-2xl md:text-3xl font-bold text-foreground">Nguyen Xuan Van</h3>
                 <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-xs border border-primary-light/20">
-                  Final-year E-commerce Student
+                  E-commerce Student
                 </span>
               </div>
 
