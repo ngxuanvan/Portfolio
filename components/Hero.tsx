@@ -273,7 +273,7 @@ export default function HeroSection() {
                            {/* Image container */}
 <div className="absolute inset-8 rounded-full overflow-hidden border-4 border-border/50 shadow-2xl">
   <Image
-    src="/atuljha.jpeg"  // or simply "atuljha.jpeg"
+    src="public/nguyenxuanvan.jpg"  // or simply "atuljha.jpeg"
     alt="Xuan Van"
     width={400}
     height={400}
