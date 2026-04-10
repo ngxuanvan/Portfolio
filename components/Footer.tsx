@@ -73,7 +73,7 @@ export default function Footer() {
           {/* Location */}
           <div className="flex items-center gap-2 mb-6">
             <MapPin className="w-3 h-3 text-subtext" />
-            <span className="text-xs text-subtext">Heritage Institute of Technology</span>
+            <span className="text-xs text-subtext">District 10, Ho Chi Minh City</span>
           </div>
 
           {/* Social links - horizontal */}

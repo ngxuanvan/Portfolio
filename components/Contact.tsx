@@ -26,13 +26,45 @@ export default function Contact() {
   const [focusedField, setFocusedField] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 3000);
+    setSubmitError(null);
+
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
+      setSubmitError('Please complete all fields before sending.');
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Unable to send message.');
+      }
+
+      setSubmitted(true);
+      setFormData({ name: '', email: '', message: '' });
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Unable to send message.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const copyEmail = () => {
@@ -226,16 +258,16 @@ export default function Contact() {
         </motion.div>
 
         {/* Main grid */}
-        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 px-2">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12 px-2 items-stretch">
           {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative group"
+            className="relative group h-full"
           >
-            <div className="relative bg-blue-50/50 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 border border-blue-100 overflow-hidden">
+            <div className="relative h-full bg-blue-50/50 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 border border-blue-100 overflow-hidden">
               {/* Top gradient line */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
 
@@ -296,12 +328,18 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="relative w-full group/btn overflow-hidden"
+                    disabled={isSubmitting}
+                    className="relative w-full group/btn overflow-hidden disabled:cursor-not-allowed"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-light to-primary rounded-xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
-                    <div className="relative px-6 py-3 md:py-4 bg-primary hover:bg-transparent rounded-xl border border-transparent hover:border-border transition-all duration-300">
+                    <div className="relative px-6 py-3 md:py-4 bg-primary hover:bg-transparent rounded-xl border border-transparent hover:border-border transition-all duration-300 disabled:opacity-70">
                       <span className="text-white group-hover/btn:text-foreground font-semibold flex items-center justify-center gap-2 text-sm md:text-base">
-                        {submitted ? (
+                        {isSubmitting ? (
+                          <>
+                            Sending...
+                            <Send className="w-3 h-3 md:w-4 md:h-4 animate-pulse" />
+                          </>
+                        ) : submitted ? (
                           <>
                             <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary-light" />
                             Message Sent!
@@ -315,6 +353,10 @@ export default function Contact() {
                       </span>
                     </div>
                   </button>
+
+                  {submitError && (
+                    <p className="text-sm text-red-500">{submitError}</p>
+                  )}
                 </form>
               </div>
             </div>
@@ -326,9 +368,9 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="space-y-4 md:space-y-6"
+            className="h-full"
           >
-            <div className="relative bg-blue-50/50 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-blue-100/50 backdrop-blur-xl">
+            <div className="relative h-full bg-blue-50/50 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-blue-100/50 backdrop-blur-xl flex flex-col">
               <div className="flex items-center justify-between mb-4 md:mb-6">
                 <h3 className="text-xl md:text-2xl font-bold text-foreground">Connect With Me</h3>
                 <div className="flex items-center gap-1 md:gap-2">
@@ -337,7 +379,7 @@ export default function Contact() {
                 </div>
               </div>
               
-              <div className="space-y-3 md:space-y-4">
+              <div className="flex-1 space-y-3 md:space-y-4">
                 {contactMethods.map((method) => (
                   <a
                     key={method.id}
@@ -394,35 +436,6 @@ export default function Contact() {
                 ))}
               </div>
 
-              {/* Availability status */}
-              <div className="mt-4 md:mt-6 flex items-center gap-2 p-2 md:p-3 bg-blue-100/40 rounded-lg md:rounded-xl border border-blue-200/50">
-                <div className="w-1.5 h-1.5 md:w-2 md:h-2 bg-primary-light rounded-full animate-pulse" />
-                <span className="text-[10px] md:text-xs text-primary-dark font-mono truncate">OPEN TO INTERNSHIPS & COLLABORATION</span>
-              </div>
-            </div>
-
-            {/* Quick Response Card */}
-            <div className="relative p-4 md:p-6 bg-blue-50/50 backdrop-blur-sm rounded-xl md:rounded-2xl border border-blue-100">
-              <div className="flex items-center gap-3 md:gap-4">
-                <div className="relative flex-shrink-0">
-                  <div className="w-12 h-12 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-blue-100 to-blue-200 flex items-center justify-center">
-                    <Clock className="w-5 h-5 md:w-6 md:h-6 text-primary-dark" />
-                  </div>
-                </div>
-                
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-sm md:text-base text-foreground font-bold mb-1">Quick Response</h4>
-                  <p className="text-xs md:text-sm text-subtext mb-2">I&apos;ll respond within 24 hours</p>
-                  <div className="flex flex-wrap gap-1 md:gap-2">
-                    <span className="text-[8px] md:text-xs px-2 py-1 bg-primary/10 text-primary rounded-full border border-primary-light/20">
-                      Aspiring ITBA
-                    </span>
-                    <span className="text-[8px] md:text-xs px-2 py-1 bg-primary/10 text-primary rounded-full border border-primary-light/20">
-                      Open to Work
-                    </span>
-                  </div>
-                </div>
-              </div>
             </div>
           </motion.div>
         </div>

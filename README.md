@@ -41,6 +41,20 @@ This project is built as a modern portfolio landing page with:
 npm install
 ```
 
+### Email setup
+
+To enable the contact form with Resend:
+
+```bash
+cp .env.example .env.local
+```
+
+Then set:
+
+- `RESEND_API_KEY`
+- `RESEND_FROM_EMAIL`
+- `CONTACT_TO_EMAIL`
+
 ### Start development server
 
 ```bash
