@@ -55,6 +55,8 @@ Then set:
 - `RESEND_FROM_EMAIL`
 - `CONTACT_TO_EMAIL`
 
+The contact form supports one optional direct attachment up to 25MB.
+
 ### Start development server
 
 ```bash

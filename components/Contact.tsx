@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { 
   Mail, 
   Linkedin, 
   Github, 
   FileText,
+  Paperclip,
   Phone,
   Send, 
   Sparkles, 
@@ -21,6 +22,8 @@ import {
 import { motion } from 'framer-motion';
 
 export default function Contact() {
+  const commonEmailDomains = ['gmail.com', 'outlook.com', 'hotmail.com', 'yahoo.com', 'icloud.com'];
+  const DIRECT_ATTACHMENT_LIMIT = 25 * 1024 * 1024;
   const [hoveredButton, setHoveredButton] = useState<string | null>(null);
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [focusedField, setFocusedField] = useState<string | null>(null);
@@ -29,6 +32,17 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const submitTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [attachment, setAttachment] = useState<File | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (submitTimeoutRef.current) {
+        clearTimeout(submitTimeoutRef.current);
+      }
+    };
+  }, []);
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -40,15 +54,26 @@ export default function Contact() {
       return;
     }
 
+    if (attachment && attachment.size > DIRECT_ATTACHMENT_LIMIT) {
+      setSubmitError('Please upload a file smaller than 25MB.');
+      return;
+    }
+
     try {
       setIsSubmitting(true);
 
+      const payload = new FormData();
+      payload.append('name', formData.name);
+      payload.append('email', formData.email);
+      payload.append('message', formData.message);
+      if (attachment) {
+        payload.append('attachment', attachment);
+        payload.append('attachmentName', attachment.name);
+      }
+
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+        body: payload,
       });
 
       const data = await response.json();
@@ -59,7 +84,14 @@ export default function Contact() {
 
       setSubmitted(true);
       setFormData({ name: '', email: '', message: '' });
-      setTimeout(() => setSubmitted(false), 3000);
+      setAttachment(null);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+      if (submitTimeoutRef.current) {
+        clearTimeout(submitTimeoutRef.current);
+      }
+      submitTimeoutRef.current = setTimeout(() => setSubmitted(false), 3000);
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : 'Unable to send message.');
     } finally {
@@ -135,6 +167,37 @@ export default function Contact() {
     "Interested in ITBA opportunities",
     "Aspiring IT Business Analyst"
   ];
+
+  const emailSuggestions = (() => {
+    const rawEmail = formData.email.trim().toLowerCase();
+
+    if (!rawEmail || rawEmail.includes(' ')) {
+      return [];
+    }
+
+    const [localPart, domainPart = ''] = rawEmail.split('@');
+
+    if (!localPart) {
+      return [];
+    }
+
+    if (!rawEmail.includes('@')) {
+      return [];
+    }
+
+    if (commonEmailDomains.includes(domainPart)) {
+      return [];
+    }
+
+    if (!domainPart) {
+      return commonEmailDomains.map((domain) => `${localPart}@${domain}`).slice(0, 5);
+    }
+
+    return commonEmailDomains
+      .filter((domain) => domain.startsWith(domainPart))
+      .map((domain) => `${localPart}@${domain}`)
+      .slice(0, 5);
+  })();
 
   // Fixed particles with deterministic values
   const particles = [...Array(12)].map((_, i) => {
@@ -271,19 +334,14 @@ export default function Contact() {
               {/* Top gradient line */}
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
 
-              <div className="relative">
-                <div className="flex items-center justify-between mb-4 md:mb-6">
+              <div className="relative flex h-full flex-col">
+                <div className="flex items-center justify-between mb-5 md:mb-6">
                   <h3 className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
                     Send a Message
                     <Send className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                   </h3>
                 </div>
-                
-                  <p className="text-xs md:text-sm text-subtext mb-6 md:mb-8 border-l-2 border-primary-light/40 pl-3 md:pl-4 italic">
-                  &quot;Strong analysis helps teams move from ambiguity to action.&quot;
-                </p>
-
-                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <form onSubmit={handleSubmit} className="flex flex-1 flex-col gap-4 md:gap-[18px]">
                   <div className="relative">
                     <input
                       type="text"
@@ -294,7 +352,7 @@ export default function Contact() {
                       onBlur={() => setFocusedField(null)}
                       className={`w-full px-4 py-3 md:py-4 bg-background rounded-xl border ${
                         focusedField === 'name' ? 'border-primary-light' : 'border-border'
-                      } text-foreground placeholder-slate-600 focus:outline-none transition-all duration-300 text-sm md:text-base`}
+                      } text-foreground placeholder-slate-600 focus:outline-none transition-all duration-300 text-sm md:text-base md:py-3`}
                     />
                   </div>
 
@@ -302,57 +360,88 @@ export default function Contact() {
                     <input
                       type="email"
                       placeholder="Email Address"
+                      list="email-suggestions"
+                      autoComplete="email"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      spellCheck={false}
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       onFocus={() => setFocusedField('email')}
                       onBlur={() => setFocusedField(null)}
                       className={`w-full px-4 py-3 md:py-4 bg-background rounded-xl border ${
                         focusedField === 'email' ? 'border-primary-light' : 'border-border'
-                      } text-foreground placeholder-slate-600 focus:outline-none transition-all duration-300 text-sm md:text-base`}
+                      } text-foreground placeholder-slate-600 focus:outline-none transition-all duration-300 text-sm md:text-base md:py-3`}
                     />
+                    <datalist id="email-suggestions">
+                      {emailSuggestions.map((suggestion) => (
+                        <option key={suggestion} value={suggestion} />
+                      ))}
+                    </datalist>
                   </div>
 
-                  <div className="relative">
+                  <div className="relative flex-1">
                     <textarea
                       placeholder="Your Message"
-                      rows={4}
+                      rows={3}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       onFocus={() => setFocusedField('message')}
                       onBlur={() => setFocusedField(null)}
                       className={`w-full px-4 py-3 md:py-4 bg-background rounded-xl border ${
                         focusedField === 'message' ? 'border-primary-light' : 'border-border'
-                      } text-foreground placeholder-slate-600 focus:outline-none transition-all duration-300 resize-none text-sm md:text-base`}
+                      } min-h-[130px] md:min-h-[145px] text-foreground placeholder-slate-600 focus:outline-none transition-all duration-300 resize-none text-sm md:text-base`}
                     />
+                  </div>
+
+                  <div className="rounded-xl border border-dashed border-border bg-background/70 p-3 md:p-3.5">
+                    <div className="flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-[34px] w-[34px] items-center justify-center rounded-xl bg-blue-100 text-primary-dark">
+                          <Paperclip className="h-4 w-4" />
+                        </div>
+                        <div>
+                          <p className="text-sm font-medium text-foreground">Attachment</p>
+                          <p className="text-xs text-subtext">Optional, up to 25MB</p>
+                        </div>
+                      </div>
+                      <label className="cursor-pointer rounded-lg border border-border px-3 py-2 text-xs font-medium text-foreground transition-colors hover:border-primary hover:text-primary">
+                        Choose File
+                        <input
+                          ref={fileInputRef}
+                          type="file"
+                          className="sr-only"
+                          accept=".pdf,.doc,.docx,.png,.jpg,.jpeg,.txt"
+                          onChange={(e) => setAttachment(e.target.files?.[0] ?? null)}
+                        />
+                      </label>
+                    </div>
+                    <p className="mt-2 truncate text-sm text-subtext">
+                      {attachment ? `${attachment.name} (${(attachment.size / (1024 * 1024)).toFixed(1)} MB)` : 'No file selected'}
+                    </p>
                   </div>
 
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="relative w-full group/btn overflow-hidden disabled:cursor-not-allowed"
+                    className="relative mt-auto w-full group/btn overflow-hidden disabled:cursor-not-allowed"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary-light to-primary rounded-xl opacity-0 group-hover/btn:opacity-100 transition-opacity duration-500" />
-                    <div className="relative px-6 py-3 md:py-4 bg-primary hover:bg-transparent rounded-xl border border-transparent hover:border-border transition-all duration-300 disabled:opacity-70">
+                    <div className="relative px-6 py-3 md:py-3.5 bg-primary hover:bg-transparent rounded-xl border border-transparent hover:border-border transition-all duration-300 disabled:opacity-70">
                       <span className="text-white group-hover/btn:text-foreground font-semibold flex items-center justify-center gap-2 text-sm md:text-base">
-                        {isSubmitting ? (
-                          <>
-                            Sending...
-                            <Send className="w-3 h-3 md:w-4 md:h-4 animate-pulse" />
-                          </>
-                        ) : submitted ? (
-                          <>
-                            <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary-light" />
-                            Message Sent!
-                          </>
+                        <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                        {submitted && !isSubmitting ? (
+                          <CheckCircle className="w-4 h-4 md:w-5 md:h-5 text-primary-light" />
                         ) : (
-                          <>
-                            Send Message
-                            <Send className="w-3 h-3 md:w-4 md:h-4 group-hover/btn:translate-x-1 transition-transform" />
-                          </>
+                          <Send className={`w-3 h-3 md:w-4 md:h-4 ${isSubmitting ? 'animate-pulse' : 'group-hover/btn:translate-x-1 transition-transform'}`} />
                         )}
                       </span>
                     </div>
                   </button>
+
+                  {submitted && !submitError && (
+                    <p className="text-sm text-green-600">Your message has been sent successfully.</p>
+                  )}
 
                   {submitError && (
                     <p className="text-sm text-red-500">{submitError}</p>
