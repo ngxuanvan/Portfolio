@@ -4,7 +4,7 @@ Personal portfolio website for Nguyen Xuan Van, focused on presenting education,
 
 ## Live Website
 
-[https://portfolio-blond-zeta-56.vercel.app/](https://portfolio-blond-zeta-56.vercel.app/)
+[https://nxvan.com/](https://nxvan.com/)
 
 ## Overview
 
@@ -132,4 +132,4 @@ Static assets are stored in `public/`, including:
 
 This site is suitable for deployment on Vercel and is currently published at:
 
-[https://portfolio-blond-zeta-56.vercel.app/](https://portfolio-blond-zeta-56.vercel.app/)
+[https://nxvan.com/](https://nxvan.com/)

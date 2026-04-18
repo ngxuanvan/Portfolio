@@ -18,6 +18,10 @@ export const metadata: Metadata = {
   title: "Nguyen Xuan Van | Full Stack Developer &Backend Systems Engineer",
   description:
     "Designing real world systems and building scalable backend services. Experienced in Node.js, Python, and Blockchain. Passionate about open source and cloud technologies.",
+  metadataBase: new URL("https://nxvan.com"),
+  alternates: {
+    canonical: "/",
+  },
 }
 
 export default function RootLayout({
