@@ -4,7 +4,6 @@ import {
   Linkedin,
   Github,
   Mail,
-  FileText,
   ChevronUp,
   MapPin
 } from 'lucide-react';
@@ -18,7 +17,6 @@ export default function Footer() {
 
   const socialLinks = [
     { icon: Linkedin, href: 'https://www.linkedin.com/in/xuanvan/', label: 'LinkedIn', username: '/in/xuanvan' },
-    { icon: FileText, href: '/atulfullstackresume.pdf', label: 'Resume', username: 'profile summary' },
     { icon: Github, href: 'https://github.com/ngxuanvan', label: 'GitHub', username: '@ngxuanvan' },
     { icon: Mail, href: 'mailto:nguyenxuanvan.work@gmail.com', label: 'Email', username: 'nguyenxuanvan.work' },
   ];

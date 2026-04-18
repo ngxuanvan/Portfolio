@@ -14,7 +14,7 @@ This project is built as a modern portfolio landing page with:
 - An about section covering education, background, and personal journey
 - A projects section with case-study style summaries
 - A skills section for current capabilities and learning focus
-- A contact section with email, phone, LinkedIn, GitHub, and resume access
+- A contact section with email, phone, LinkedIn, and GitHub
 - Smooth scrolling and animated UI transitions
 
 ## Tech Stack
@@ -99,7 +99,6 @@ npm run lint
 │   └── ui/
 ├── hooks/
 ├── public/
-│   ├── atulfullstackresume.pdf
 │   └── ...
 ├── package.json
 └── README.md
@@ -111,16 +110,12 @@ npm run lint
 - `About`: academic background, achievements, and career journey
 - `Projects`: selected work with problem, approach, and impact
 - `Skills`: technologies and focus areas
-- `Contact`: direct contact methods and resume link
+- `Contact`: direct contact methods
 - `Footer`: social links and closing section
 
 ## Assets
 
-Static assets are stored in `public/`, including:
-
-- Resume PDF
-- School logos
-- Personal/project images
+Static assets are stored in `public/`, including school logos and personal/project images.
 
 ## Contact
 

@@ -10,7 +10,6 @@ import {
   BarChart3, 
   Briefcase, 
   Mail,
-  FileText,
   Award
 } from 'lucide-react';
 
@@ -58,10 +57,6 @@ export default function Navbar() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
-  const handleResumeClick = () => {
-    window.open('/atulfullstackresume.pdf', '_blank');
-  };
 
   const navLinks = [
     { href: '#home', label: 'Home', icon: Home, gradient: 'from-blue-100 to-blue-200' },
@@ -196,17 +191,6 @@ export default function Navbar() {
                       </a>
                     ))}
 
-                    <button 
-                      onClick={handleResumeClick}
-                      className="ml-2 relative group/btn"
-                    >
-                      <div className="relative px-4 py-2 rounded-xl bg-primary hover:bg-primary-dark transition-colors duration-300 overflow-hidden">
-                        <span className="text-sm font-medium text-white flex items-center gap-2">
-                          <FileText className="w-3.5 h-3.5" />
-                          Resume
-                        </span>
-                      </div>
-                    </button>
                   </div>
                 </div>
               </div>
@@ -288,19 +272,6 @@ export default function Navbar() {
                     `} />
                   </a>
                 ))}
-
-                {/* Mobile Resume Button */}
-                <button 
-                  onClick={handleResumeClick}
-                  className="w-full mt-4 group/btn relative overflow-hidden rounded-xl"
-                >
-                  <div className="relative px-5 py-3 bg-primary hover:bg-primary-dark transition-colors duration-300">
-                    <span className="text-white text-sm font-medium flex items-center justify-center gap-2">
-                      <FileText className="w-4 h-4" />
-                      Resume
-                    </span>
-                  </div>
-                </button>
               </div>
             </div>
           </div>

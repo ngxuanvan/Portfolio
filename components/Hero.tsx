@@ -8,7 +8,6 @@ import {
     BookOpen,
     Linkedin,
     Mail,
-    FileText,
     ClipboardList,
     Workflow,
     Network,
@@ -50,7 +49,6 @@ export default function HeroSection() {
 
     const socialLinks = [
         { icon: Linkedin, href: 'https://www.linkedin.com/in/xuanvan/', label: 'LinkedIn', color: 'from-primary to-primary' },
-        { icon: FileText, href: '/atulfullstackresume.pdf', label: 'Resume', color: 'from-primary to-primary-light' },
         { icon: Mail, href: 'mailto:nguyenxuanvan.work@gmail.com', label: 'Email', color: 'from-primary-light to-primary-light' },
     ]
 

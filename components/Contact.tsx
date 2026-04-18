@@ -5,7 +5,6 @@ import {
   Mail, 
   Linkedin, 
   Github, 
-  FileText,
   Paperclip,
   Phone,
   Send, 
@@ -143,15 +142,6 @@ export default function Contact() {
       gradient: 'from-blue-100 to-blue-200',
       description: 'Connect professionally'
     },
-    {
-      id: 'resume',
-      icon: FileText,
-      label: 'Resume',
-      value: 'ITBA Resume',
-      href: '/atulfullstackresume.pdf',
-      gradient: 'from-blue-100 to-blue-200',
-      description: 'View my profile summary'
-    }
   ];
 
   const stats = [
