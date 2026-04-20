@@ -138,7 +138,7 @@ const ProjectsSection: React.FC = () => {
           ${activeIndex === index ? 'scale-[1.02]' : 'scale-100'}
         `}
       >
-        <div className="relative overflow-hidden bg-card/80 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-border/50 hover:bg-blue-50/50 hover:border-blue-200 transition-all duration-300">
+        <div className="relative overflow-hidden bg-card/80 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-border/50 hover:bg-card hover:border-primary-light/30 transition-all duration-300">
           <div
             className={`
               absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${item.gradient}
@@ -179,7 +179,7 @@ const ProjectsSection: React.FC = () => {
                   <h3 className="text-2xl lg:text-4xl font-bold text-foreground tracking-tight">
                     {item.title}
                   </h3>
-                  <p className="mt-2 text-lg font-semibold text-primary-dark">{item.role}</p>
+                  <p className="mt-2 text-lg font-semibold text-primary">{item.role}</p>
                 </div>
               </div>
 
@@ -243,7 +243,7 @@ const ProjectsSection: React.FC = () => {
               {item.tech.map((tech) => (
                 <span
                   key={`${item.title}-${tech}`}
-                  className="px-3 py-1 text-xs font-semibold text-primary-dark bg-blue-100 rounded-full border border-blue-200"
+                  className="px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full border border-primary-light/20"
                 >
                   {tech}
                 </span>

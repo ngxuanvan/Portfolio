@@ -222,11 +222,11 @@ export default function Navbar() {
           `}>
             <div className="relative">
               {/* Background */}
-              <div className="absolute inset-0 bg-blue-50/50 rounded-3xl blur-xl" />
-              <div className="absolute inset-0 backdrop-blur-xl bg-blue-50/90 rounded-3xl border border-blue-100/50" />
+              <div className="absolute inset-0 bg-card/60 rounded-3xl blur-xl" />
+              <div className="absolute inset-0 backdrop-blur-xl bg-card/90 rounded-3xl border border-border/60" />
               
               {/* Animated border */}
-              <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-r from-primary-light via-blue-200 to-primary-light opacity-20" />
+              <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-r from-primary-light via-primary to-primary-light opacity-20" />
               
               <div className="relative p-5 space-y-2">
                 {navLinks.map((link, index) => (
@@ -241,8 +241,8 @@ export default function Navbar() {
                       group flex items-center gap-3 px-4 py-3 rounded-xl
                       transition-all duration-300
                       ${activeLink === link.label.toLowerCase() 
-                        ? 'bg-blue-100/50 text-primary-dark font-semibold' 
-                        : 'text-subtext hover:bg-blue-50/50'
+                        ? 'bg-primary/15 text-foreground font-semibold' 
+                        : 'text-subtext hover:bg-card/80'
                       }
                     `}
                     style={{
@@ -255,7 +255,7 @@ export default function Navbar() {
                       w-9 h-9 rounded-lg bg-gradient-to-r ${link.gradient} 
                       flex items-center justify-center
                     `}>
-                        <link.icon className="w-4 h-4 text-primary-dark" />
+                        <link.icon className="w-4 h-4 text-primary" />
                     </div>
 
                     <div className="flex-1">

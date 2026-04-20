@@ -290,14 +290,14 @@ export default function Contact() {
                 key={index}
                 className="group relative"
               >
-                <div className="absolute inset-0 bg-blue-100/50 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                <div className="relative bg-blue-50/50 backdrop-blur-sm rounded-xl md:rounded-2xl p-3 md:p-5 border border-blue-100 group-hover:border-transparent transition-all duration-300">
+                <div className="absolute inset-0 bg-primary/10 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
+                <div className="relative bg-card/70 backdrop-blur-sm rounded-xl md:rounded-2xl p-3 md:p-5 border border-border group-hover:border-primary-light/30 transition-all duration-300">
                   <div className="flex items-center gap-2 md:gap-3">
                     <div className={`
                       w-8 h-8 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-r ${stat.gradient} 
                       flex items-center justify-center group-hover:scale-110 transition-transform duration-300
                     `}>
-                      <Icon className="w-4 h-4 md:w-5 md:h-5 text-primary-dark" />
+                      <Icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                     </div>
                     <div>
                       <div className="text-lg md:text-2xl font-bold text-foreground">{stat.value}</div>
@@ -320,9 +320,9 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="relative group h-full"
           >
-            <div className="relative h-full bg-blue-50/50 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 border border-blue-100 overflow-hidden">
+            <div className="relative h-full bg-card/70 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 border border-border overflow-hidden">
               {/* Top gradient line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-300 via-blue-200 to-blue-300 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-primary-light to-primary transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out" />
 
               <div className="relative flex h-full flex-col">
                 <div className="flex items-center justify-between mb-5 md:mb-6">
@@ -387,7 +387,7 @@ export default function Contact() {
                   <div className="rounded-xl border border-dashed border-border bg-background/70 p-3 md:p-3.5">
                     <div className="flex items-center justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-[34px] w-[34px] items-center justify-center rounded-xl bg-blue-100 text-primary-dark">
+                        <div className="flex h-[34px] w-[34px] items-center justify-center rounded-xl bg-primary/10 text-primary">
                           <Paperclip className="h-4 w-4" />
                         </div>
                         <div>
@@ -449,7 +449,7 @@ export default function Contact() {
             transition={{ duration: 0.6 }}
             className="h-full"
           >
-            <div className="relative h-full bg-blue-50/50 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-blue-100/50 backdrop-blur-xl flex flex-col">
+            <div className="relative h-full bg-card/70 rounded-2xl md:rounded-3xl p-6 md:p-8 border border-border/60 backdrop-blur-xl flex flex-col">
               <div className="flex items-center justify-between mb-4 md:mb-6">
                 <h3 className="text-xl md:text-2xl font-bold text-foreground">Connect With Me</h3>
                 <div className="flex items-center gap-1 md:gap-2">
@@ -477,11 +477,8 @@ export default function Contact() {
                   >
                     <div className="relative p-3 md:p-4 bg-background rounded-xl md:rounded-2xl border border-border hover:border-transparent transition-all duration-300">
                       <div className="flex items-center gap-3 md:gap-4">
-                        <div className={`
-                          w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-gradient-to-r ${method.gradient} 
-                          flex items-center justify-center flex-shrink-0
-                        `}>
-                          <method.icon className="w-4 h-4 md:w-5 md:h-5 text-primary-dark" />
+                        <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg md:rounded-xl bg-primary/10 border border-primary-light/20 flex items-center justify-center flex-shrink-0">
+                          <method.icon className="w-4 h-4 md:w-5 md:h-5 text-primary" />
                         </div>
                         
                         <div className="flex-1 min-w-0">
@@ -527,12 +524,12 @@ export default function Contact() {
           transition={{ duration: 0.6 }}
           className="mt-12 md:mt-16 text-center"
         >
-          <div className="inline-flex items-center gap-2 md:gap-4 p-3 md:p-4 bg-blue-50/50 rounded-xl md:rounded-2xl border border-blue-100 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 md:gap-4 p-3 md:p-4 bg-card/70 rounded-xl md:rounded-2xl border border-border backdrop-blur-sm">
             <div className="flex -space-x-2">
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-gradient-to-r from-blue-100 to-blue-200 border-2 border-card flex items-center justify-center text-[8px] md:text-xs text-primary-dark font-bold"
+                  className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-primary/10 border-2 border-card flex items-center justify-center text-[8px] md:text-xs text-primary font-bold"
                 >
                   {String.fromCharCode(64 + i)}
                 </div>

@@ -288,7 +288,7 @@ export default function Skills() {
                 ${hoveredCategory === index ? 'scale-105' : 'scale-100'}
               `}>
                 {/* Card content */}
-                <div className="relative overflow-hidden bg-card/80 backdrop-blur-xl rounded-2xl p-6 border border-border/50 hover:border-blue-200 hover:bg-blue-50/50 transition-all duration-300">
+                <div className="relative overflow-hidden bg-card/80 backdrop-blur-xl rounded-2xl p-6 border border-border/50 hover:border-primary-light/30 hover:bg-card transition-all duration-300">
                   {/* Top gradient line */}
                   <div className={`
                     absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${category.color} 
@@ -326,7 +326,7 @@ export default function Skills() {
                       {category.skills.map((skill) => (
                         <div
                           key={skill.name}
-                          className="group/skill relative p-4 rounded-xl bg-border/20 border border-border/50 hover:bg-blue-50 hover:border-blue-200 transition-all duration-300"
+                          className="group/skill relative p-4 rounded-xl bg-border/20 border border-border/50 hover:bg-card hover:border-primary-light/30 transition-all duration-300"
                         >
                           <div className="relative space-y-3">
                             <div className="flex items-start justify-between gap-3">
