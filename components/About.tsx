@@ -225,10 +225,10 @@ export default function About() {
               </div>
 
               <p className="text-base md:text-lg text-subtext leading-relaxed mb-6 max-w-3xl">
-                E-commerce student with a proactive learning mindset and a focus on developing analytical thinking. Enjoys
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-light font-semibold"> understanding problems</span>,
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary font-semibold"> thinking logically</span>, and improving
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-primary-light font-semibold"> analytical skills</span>.
+                E-commerce student experienced in building e-commerce websites with ASP.NET Core MVC and WordPress. Basic knowledge of
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-light font-semibold"> requirement analysis</span> (User Stories, BRD),
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary font-semibold"> user flow design</span>, payment integration, and SEO/data analysis. Seeking a Business Analyst Intern role to apply
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-primary-light font-semibold"> analytical skills</span> and support business-technical solutions.
               </p>
 
               {/* Social links */}
