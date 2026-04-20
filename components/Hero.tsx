@@ -181,7 +181,7 @@ export default function HeroSection() {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.6 }}
-                            className="text-base md:text-lg text-black text-justify max-w-xl leading-relaxed mb-8"
+                            className="text-base md:text-lg text-foreground text-justify max-w-xl leading-relaxed mb-8"
                         >
                             E-commerce student experienced in building e-commerce websites with ASP.NET Core MVC and WordPress.
                             Basic knowledge of <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-light font-semibold">requirement analysis</span> (User Stories, BRD),
