@@ -183,9 +183,10 @@ export default function HeroSection() {
                             transition={{ duration: 0.6, delay: 0.6 }}
                             className="text-base md:text-lg text-black text-justify max-w-xl leading-relaxed mb-8"
                         >
-                            E-commerce student with a strong interest in business analysis and data-driven decision-making.
-                            Skilled in <span className="font-semibold">market research</span> and <span className="font-semibold">user behavior analysis</span>, with a foundational understanding of business analysis concepts.
-                            Seeking a Business Analyst Intern role to contribute analytical insights and support business growth.
+                            E-commerce student experienced in building e-commerce websites with ASP.NET Core MVC and WordPress.
+                            Basic knowledge of <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary-light font-semibold">requirement analysis</span> (User Stories, BRD),
+                            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary font-semibold"> user flow design</span>, payment integration, and SEO/data analysis.
+                            Seeking a Business Analyst Intern role to apply <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-light to-primary-light font-semibold">analytical skills</span> and support business-technical solutions.
                         </motion.p>
 
                         {/* Learning Stack */}
