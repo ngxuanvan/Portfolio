@@ -100,8 +100,8 @@ export default function About() {
     },
     {
       year: '2026',
-      title: 'Developing IT Business Analysis',
-      description: 'Participated in e-commerce projects, gathering requirements and designing user flows',
+      title: 'Aspiring Business Analyst',
+      description: 'With hands-on experience in requirement analysis and user flow design through academic projects.',
       icon: Compass,
       color: 'blue'
     }
