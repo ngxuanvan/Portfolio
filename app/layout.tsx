@@ -1,6 +1,7 @@
 import "./globals.css"
 import type { Metadata } from "next"
 import { Inter, Dancing_Script } from "next/font/google"
+import Script from "next/script"
 import SmoothScroll from "@/components/SmoothScroll"
 
 const inter = Inter({
@@ -31,6 +32,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${inter.variable} ${dancingScript.variable}`}>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-3Z19CK8LHZ" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-3Z19CK8LHZ');
+        `}
+      </Script>
       <body suppressHydrationWarning className="bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
         <SmoothScroll>{children}</SmoothScroll>
       </body>

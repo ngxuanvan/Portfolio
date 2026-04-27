@@ -39,7 +39,7 @@ export default function About() {
     { icon: GraduationCap, value: '3.6/4.0', label: 'UEH GPA', color: 'blue', emoji: '📘', description: 'Bachelor of E-commerce' },
     { icon: Medal, value: '8.2/10', label: 'FPT GPA', color: 'purple', emoji: '🎓', description: 'Associate Degree in E-commerce' },
     { icon: Award, value: '2+', label: 'E-commerce Projects', color: 'pink', emoji: '🛒', description: 'Academic and team-led websites' },
-    { icon: Users, value: '4 Months', label: 'SEO Experience', color: 'blue', emoji: '📈', description: 'SEO Specialist (BA-oriented)' },
+    { icon: Users, value: '4 Months', label: 'SEO Experience', color: 'blue', emoji: '📈', description: 'SEO Specialist' },
   ]
 
   const education = [
