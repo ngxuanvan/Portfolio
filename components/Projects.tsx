@@ -38,7 +38,7 @@ const ProjectsSection: React.FC = () => {
     {
       category: "EXPERIENCE",
       title: "DUONG GIA PHAT TRADING AND TRADING CI., LTD.",
-      role: "SEO Specialist (BA-oriented)",
+      role: "SEO Specialist",
       companyOrClient: "Marketing Tools",
       location: "Ho Chi Minh City, Vietnam",
       period: "06/2024 - 10/2024",
