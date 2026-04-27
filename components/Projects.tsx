@@ -184,7 +184,7 @@ const ProjectsSection: React.FC = () => {
               </div>
 
               <div className="lg:text-right">
-                <p className="text-sm font-medium text-foreground">{item.location}</p>
+                <p className="text-sm font-medium text-foreground whitespace-nowrap">{item.location}</p>
                 <p className="text-sm text-subtext mt-1">{item.period}</p>
               </div>
             </div>
