@@ -8,7 +8,6 @@ import {
   Award,
   Users,
   ChevronRight,
-  Brain,
   Briefcase,
   ClipboardList,
   GraduationCap,
@@ -105,21 +104,6 @@ export default function About() {
       description: 'Participated in e-commerce projects, gathering requirements and designing user flows',
       icon: Compass,
       color: 'blue'
-    }
-  ]
-
-  const philosophy = [
-    {
-      quote: "Code is poetry, but purpose is everything.",
-      author: "— Nguyen Xuan Van"
-    },
-    {
-      quote: "Build things that matter, solve problems that exist.",
-      author: "— Personal Mantra"
-    },
-    {
-      quote: "The best way to predict the future is to create it.",
-      author: "— Peter Drucker"
     }
   ]
 
@@ -405,33 +389,6 @@ export default function About() {
             </div>
           </motion.div>
         </div>
-
-        {/* Philosophy Card - Full Width */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="group relative max-w-3xl mx-auto"
-        >
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-primary-light/10 to-primary/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur" />
-          
-          <div className="relative p-6 bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50">
-            <div className="flex items-center gap-3 mb-4">
-              <Brain className="w-5 h-5 text-primary" />
-              <h4 className="text-foreground font-semibold">Guiding Philosophy</h4>
-            </div>
-            
-            <div className="relative">
-              <Quote className="absolute -top-2 -left-2 w-6 h-6 text-primary/20" />
-              <p className="text-sm text-foreground italic pl-6">
-                {philosophy[rotatingText].quote}
-              </p>
-              <p className="text-xs text-subtext mt-2 text-right">
-                {philosophy[rotatingText].author}
-              </p>
-            </div>
-          </div>
-        </motion.div>
 
         {/* Footer quote */}
         <motion.div
