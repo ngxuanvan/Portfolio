@@ -16,9 +16,9 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  title: "Nguyen Xuan Van | Full Stack Developer &Backend Systems Engineer",
+  title: "Nguyen Xuan Van | Business Analyst | E-commerce & System Analysis",
   description:
-    "Designing real world systems and building scalable backend services. Experienced in Node.js, Python, and Blockchain. Passionate about open source and cloud technologies.",
+    "Business Analyst Intern with experience in requirement gathering, user flow design, and system analysis, focusing on e-commerce solutions.",
   metadataBase: new URL("https://nxvan.com"),
   alternates: {
     canonical: "/",
