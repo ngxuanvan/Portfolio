@@ -35,7 +35,7 @@ export default function About() {
   }, [])
 
   const achievements = [
-    { icon: GraduationCap, value: '3.6/4.0', label: 'UEH GPA', color: 'blue', emoji: '📘', description: 'Bachelor of E-commerce' },
+    { icon: GraduationCap, value: '3.7/4.0', label: 'UEH GPA', color: 'blue', emoji: '📘', description: 'Bachelor of E-commerce' },
     { icon: Medal, value: '8.2/10', label: 'FPT GPA', color: 'purple', emoji: '🎓', description: 'Associate Degree in E-commerce' },
     { icon: Award, value: '2+', label: 'E-commerce Projects', color: 'pink', emoji: '🛒', description: 'Academic and team-led websites' },
     { icon: Users, value: '4 Months', label: 'SEO Experience', color: 'blue', emoji: '📈', description: 'SEO Specialist' },
@@ -46,7 +46,7 @@ export default function About() {
       degree: 'Bachelor of E-commerce',
       institution: 'University of Economics HCMC',
       year: '2024 – 2026 (Expected)',
-      score: '3.6/4.0',
+      score: '3.7/4.0',
       logo: '/logo-ueh.png',
       logoAlt: 'University of Economics HCMC logo',
       color: 'from-primary to-primary-light',
