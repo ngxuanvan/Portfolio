@@ -16,7 +16,7 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  title: "Nguyen Xuan Van | Business Analyst",
+  title: "Nguyen Xuan Van | Business Analyst Intern",
   description:
     "Business Analyst Intern with experience in requirement gathering, user flow design, and system analysis, focusing on e-commerce solutions.",
   metadataBase: new URL("https://nxvan.com"),
