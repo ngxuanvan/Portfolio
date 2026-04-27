@@ -15,11 +15,56 @@ const dancingScript = Dancing_Script({
   display: "swap",
 })
 
+const siteUrl = "https://www.nxvan.com"
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      name: "Nguyen Xuan Van",
+      url: siteUrl,
+      image: `${siteUrl}/nguyenxuanvan.jpg`,
+      jobTitle: "Business Analyst Intern",
+      email: "mailto:nguyenxuanvan.work@gmail.com",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: "Ho Chi Minh City",
+        addressCountry: "VN",
+      },
+      sameAs: [
+        "https://github.com/ngxuanvan",
+        "https://www.linkedin.com/in/xuanvan/",
+      ],
+      knowsAbout: [
+        "Business Analysis",
+        "Requirement Gathering",
+        "User Flow Design",
+        "System Analysis",
+        "E-commerce",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      url: siteUrl,
+      name: "Nguyen Xuan Van Portfolio",
+      description:
+        "Business Analyst Intern with experience in requirement gathering, user flow design, and system analysis, focusing on e-commerce solutions.",
+      publisher: {
+        "@id": `${siteUrl}/#person`,
+      },
+      inLanguage: "en",
+    },
+  ],
+}
+
 export const metadata: Metadata = {
   title: "Nguyen Xuan Van | Business Analyst Intern",
   description:
     "Business Analyst Intern with experience in requirement gathering, user flow design, and system analysis, focusing on e-commerce solutions.",
-  metadataBase: new URL("https://nxvan.com"),
+  metadataBase: new URL(siteUrl),
   alternates: {
     canonical: "/",
   },
@@ -45,6 +90,11 @@ export default function RootLayout({
           gtag('config', 'G-3Z19CK8LHZ');
         `}
       </Script>
+      <Script
+        id="schema-org"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
       <body suppressHydrationWarning className="bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground">
         <SmoothScroll>{children}</SmoothScroll>
       </body>
