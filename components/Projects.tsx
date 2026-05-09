@@ -71,7 +71,7 @@ const ProjectsSection: React.FC = () => {
       problem: "The website needed clear functional requirements for core shopping flows such as product browsing, cart handling, checkout, and sandbox payment integration.",
       approach: "Gathered and documented requirements through user stories and BRD notes, defined system functions, designed key user flows, and worked closely with the development team during implementation and testing.",
       impact: "Created a clearer foundation for development, improved alignment between business needs and system features, and supported a more complete e-commerce experience.",
-      link: "https://dotnet.resip.io.vn/",
+      link: "https://github.com/ngxuanvan/ReSip-Multi-Payment-E-Commerce",
       icon: MonitorSmartphone,
       gradient: "from-primary via-primary-light to-primary",
       metrics: [
