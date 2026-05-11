@@ -272,11 +272,12 @@ export default function HeroSection() {
                             {/* Image container */}
                             <div className="absolute inset-8 rounded-full overflow-hidden border-4 border-border/50 shadow-2xl">
                                 <Image
-                                    src="/nguyenxuanvan.jpg"
+                                    src="/nxvan(1080 x 1080 px).png"
                                     alt="Xuan Van"
                                     fill
                                     sizes="(max-width: 1024px) 20rem, 24rem"
-                                    className="object-cover object-[center_22%]"
+                                    className="object-cover object-center"
+                                    unoptimized
                                     priority
                                 />
                             </div>
