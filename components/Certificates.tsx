@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { X, ChevronLeft, ChevronRight, Award } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Award, Eye, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
@@ -10,10 +10,12 @@ export default function Certificates() {
 
 
   const certificates = [
-    { id: 1, src: '/img1.jpeg', alt: 'Certificate 1' },
-    { id: 2, src: '/img2.jpeg', alt: 'Certificate 2' },
-    { id: 3, src: '/img3.jpeg', alt: 'Certificate 3' },
-    { id: 4, src: '/img4.png', alt: 'Certificate 4' },
+    {
+      id: 1,
+      src: '/Certificate_What_is_Business_analyst.jpeg',
+      alt: 'What is Business Analysis certificate',
+      credentialUrl: 'https://www.linkedin.com/learning/certificates/22d7f1fa3235aadd9b46dc4aca0e526198e9c70098ebee219efbe5656641f088?trk=share_certificate',
+    },
   ];
 
   const handlePrevious = () => {
@@ -32,7 +34,7 @@ export default function Certificates() {
       className="relative py-20 md:py-24 px-4 sm:px-6 overflow-hidden bg-gradient-to-b from-background via-card to-background"
     >
       {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
         {/* Gradient orbs */}
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-primary/20 rounded-full blur-[100px] -translate-y-1/2 -translate-x-1/2 animate-pulse" />
         <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary-light/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 animate-pulse" />
@@ -62,13 +64,13 @@ export default function Certificates() {
             </span>
           </h2>
 
-          <p className="text-sm text-subtext max-w-2xl mx-auto font-light italic">
-            &quot;Learning never exhausts the mind.&quot;
+          <p className="text-sm text-subtext max-w-2xl mx-auto font-light">
+            Validated learning milestones for my Business Analyst path.
           </p>
         </motion.div>
 
         {/* Certificate Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 max-w-xl mx-auto gap-4 md:gap-6">
           {certificates.map((cert, index) => (
             <motion.div
               key={cert.id}
@@ -76,31 +78,50 @@ export default function Certificates() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group relative cursor-pointer"
-              onClick={() => setSelectedImage(index)}
+              className="group relative"
             >
               {/* Hover glow */}
-              <div className="absolute -inset-2 bg-gradient-to-r from-primary to-primary-light rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
+              <div className="pointer-events-none absolute -inset-2 bg-gradient-to-r from-primary to-primary-light rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-all duration-500" />
               
               {/* Certificate card */}
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm border border-border/50 hover:border-transparent transition-colors duration-300">
-                <Image
-                  src={cert.src}
-                  alt={cert.alt}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                
-                {/* View indicator */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <div className="px-3 py-1.5 bg-white/10 backdrop-blur-md rounded-full border border-white/20">
-                    <span className="text-xs text-foreground">Click to view</span>
+              <div className="relative rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm border border-border/50 hover:border-primary-light/50 transition-colors duration-300">
+                <div className="relative aspect-[1280/800]">
+                  <Image
+                    src={cert.src}
+                    alt={cert.alt}
+                    fill
+                    sizes="(min-width: 768px) 576px, calc(100vw - 32px)"
+                    className="object-cover object-top group-hover:scale-[1.02] transition-transform duration-500"
+                  />
+                  
+                  <div className="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500" />
+
+                  <div className="absolute right-3 top-3 flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        setSelectedImage(index);
+                      }}
+                      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-card/70 text-primary shadow-md shadow-slate-300/30 ring-1 ring-border/70 backdrop-blur-sm transition-colors hover:bg-card hover:text-primary-dark"
+                      aria-label="View certificate"
+                    >
+                      <Eye className="h-4 w-4" />
+                    </button>
                   </div>
                 </div>
+
               </div>
+              <a
+                href={cert.credentialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(event) => event.stopPropagation()}
+                className="relative z-20 mx-auto mt-4 flex w-[68%] min-w-56 items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary-dark"
+              >
+                View Credential
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </motion.div>
           ))}
         </div>
@@ -124,12 +145,13 @@ export default function Certificates() {
             <div className="absolute -top-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-primary-light to-primary rounded-t-2xl" />
 
             {/* Certificate image */}
-            <div className="relative aspect-[16/9] rounded-2xl overflow-hidden bg-card border border-border/50">
+            <div className="relative aspect-[1280/800] rounded-2xl overflow-hidden bg-card border border-border/50">
               <Image
                 src={certificates[selectedImage].src}
                 alt={certificates[selectedImage].alt}
                 fill
-                className="object-contain"
+                sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
+                className="object-cover object-top"
                 priority
               />
 
@@ -162,7 +184,18 @@ export default function Certificates() {
                   {selectedImage + 1} / {certificates.length}
                 </span>
               </div>
+
+              <a
+                href={certificates[selectedImage].credentialUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="absolute bottom-4 right-4 z-20 inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary-dark"
+              >
+                Verify
+                <ExternalLink className="h-4 w-4" />
+              </a>
             </div>
+
           </div>
         </div>
       )}
