@@ -130,22 +130,48 @@ export default function Certificates() {
       {/* Modal Popup */}
       {selectedImage !== null && (
         <div 
-          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6"
           onClick={() => setSelectedImage(null)}
         >
           {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/90 backdrop-blur-xl" />
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-md" />
           
           {/* Modal content */}
           <div 
-            className="relative max-w-5xl w-full"
+            className="relative flex max-h-[calc(100vh-2rem)] w-full max-w-5xl flex-col"
             onClick={(e) => e.stopPropagation()}
           >
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <div className="rounded-full bg-white px-3 py-1.5 text-xs font-medium text-slate-700 shadow-lg shadow-black/20">
+                {selectedImage + 1} / {certificates.length}
+              </div>
+
+              <div className="flex items-center gap-2">
+                <a
+                  href={certificates[selectedImage].credentialUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/30 transition-colors hover:bg-primary-dark"
+                >
+                  Verify
+                  <ExternalLink className="h-4 w-4" />
+                </a>
+
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-slate-700 shadow-lg shadow-black/20 transition-colors hover:bg-red-50 hover:text-red-600"
+                  aria-label="Close certificate preview"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+            </div>
+
             {/* Top gradient bar */}
-            <div className="absolute -top-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-primary-light to-primary rounded-t-2xl" />
+            <div className="h-0.5 rounded-t-2xl bg-gradient-to-r from-primary via-primary-light to-primary" />
 
             {/* Certificate image */}
-            <div className="relative aspect-[1280/800] rounded-2xl overflow-hidden bg-card border border-border/50">
+            <div className="relative aspect-[1280/800] max-h-[calc(100vh-7.5rem)] min-h-0 overflow-hidden rounded-b-2xl bg-card border border-border/50">
               <Image
                 src={certificates[selectedImage].src}
                 alt={certificates[selectedImage].alt}
@@ -154,48 +180,47 @@ export default function Certificates() {
                 className="object-cover object-top"
                 priority
               />
-
-              {/* Navigation buttons */}
-              <button
-                onClick={handlePrevious}
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center hover:bg-primary-light/20 hover:border-primary-light transition-all duration-300"
-              >
-                <ChevronLeft className="w-5 h-5 text-foreground" />
-              </button>
-              
-              <button
-                onClick={handleNext}
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center hover:bg-primary-light/20 hover:border-primary-light transition-all duration-300"
-              >
-                <ChevronRight className="w-5 h-5 text-foreground" />
-              </button>
-
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/50 border border-white/10 flex items-center justify-center hover:bg-red-500/20 hover:border-red-500 transition-all duration-300"
-              >
-                <X className="w-5 h-5 text-foreground" />
-              </button>
-
-              {/* Counter */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-black/50 backdrop-blur-md rounded-full border border-white/10">
-                <span className="text-xs text-foreground">
-                  {selectedImage + 1} / {certificates.length}
-                </span>
-              </div>
-
-              <a
-                href={certificates[selectedImage].credentialUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute bottom-4 right-4 z-20 inline-flex h-10 items-center gap-2 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground shadow-lg shadow-primary/20 transition-colors hover:bg-primary-dark"
-              >
-                Verify
-                <ExternalLink className="h-4 w-4" />
-              </a>
             </div>
 
+            {/* Navigation buttons */}
+            {certificates.length > 1 && (
+              <>
+                <button
+                  onClick={handlePrevious}
+                  className="absolute -left-12 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-lg shadow-black/20 transition-colors hover:bg-primary hover:text-primary-foreground lg:flex"
+                  aria-label="Previous certificate"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                
+                <button
+                  onClick={handleNext}
+                  className="absolute -right-12 top-1/2 hidden h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white text-primary shadow-lg shadow-black/20 transition-colors hover:bg-primary hover:text-primary-foreground lg:flex"
+                  aria-label="Next certificate"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </>
+            )}
+
+            {certificates.length > 1 && (
+              <div className="mt-3 flex justify-center gap-2 lg:hidden">
+                <button
+                  onClick={handlePrevious}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-primary shadow-lg shadow-black/20 transition-colors hover:bg-primary hover:text-primary-foreground"
+                  aria-label="Previous certificate"
+                >
+                  <ChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-primary shadow-lg shadow-black/20 transition-colors hover:bg-primary hover:text-primary-foreground"
+                  aria-label="Next certificate"
+                >
+                  <ChevronRight className="h-5 w-5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       )}
