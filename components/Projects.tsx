@@ -19,9 +19,9 @@ type PortfolioItem = {
   timeline: string;
   location: string;
   summary?: string;
+  link?: string;
   impacts: string[];
   skills: string[];
-  link: string;
   icon: React.ComponentType<{ className?: string }>;
 };
 
@@ -45,12 +45,11 @@ const items: PortfolioItem[] = [
       "SEO Analysis",
       "Market Research",
     ],
-    link: "https://www.linkedin.com/in/xuanvan/",
     icon: SearchCheck,
   },
   {
     type: "Project",
-    company: "E-COMMERCE WEBSITE (ASP.NET CORE MVC)",
+    company: "E-commerce Website (ASP.NET Core MVC)",
     position: "Technical Team Lead",
     timeline: "01/2026 - 04/2026",
     location: "Ho Chi Minh City, Vietnam",
@@ -72,7 +71,7 @@ const items: PortfolioItem[] = [
   },
   {
     type: "Project",
-    company: "E-COMMERCE SYSTEM ANALYSIS & DESIGN",
+    company: "E-commerce System Analysis & Design",
     position: "Business Analyst",
     timeline: "08/2025 - 12/2025",
     location: "Ho Chi Minh City, Vietnam",
@@ -94,7 +93,7 @@ const items: PortfolioItem[] = [
   },
   {
     type: "Project",
-    company: "E-COMMERCE WEBSITE (dochoimohinh.com.vn)",
+    company: "E-commerce Website (dochoimohinh.com.vn)",
     position: "Team Lead (BA & WordPress)",
     timeline: "08/2023 - 12/2023",
     location: "Ho Chi Minh City, Vietnam",
@@ -227,17 +226,19 @@ const WorkCard = ({
           ))}
         </div>
 
-        <div className="mt-8 flex justify-end">
-          <a
-            href={item.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
-          >
-            View Detail
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
-        </div>
+        {item.link && (
+          <div className="mt-8 flex justify-end">
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
+            >
+              View Detail
+              <ArrowUpRight className="h-4 w-4" />
+            </a>
+          </div>
+        )}
       </div>
     </motion.article>
   );
