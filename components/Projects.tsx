@@ -1,391 +1,313 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { Briefcase, MonitorSmartphone, ShoppingBag } from 'lucide-react';
 
-type ShowcaseItem = {
-  category: "EXPERIENCE" | "PROJECT";
-  title: string;
-  role: string;
-  companyOrClient: string;
+import React from "react";
+import { motion, type Variants } from "framer-motion";
+import {
+  CalendarDays,
+  CheckCircle2,
+  Code2,
+  MapPin,
+  SearchCheck,
+  ShoppingBag,
+} from "lucide-react";
+
+type PortfolioItem = {
+  type: "Experience" | "Project";
+  company: string;
+  position: string;
+  timeline: string;
   location: string;
-  period: string;
   summary: string;
-  problem: string;
-  approach: string;
-  impact: string;
+  impacts: string[];
+  skills: string[];
   link: string;
   icon: React.ComponentType<{ className?: string }>;
-  gradient: string;
-  metrics: { label: string; value: string; color: string }[];
-  tech: string[];
-  tags: string[];
 };
 
-const ProjectsSection: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
+const items: PortfolioItem[] = [
+  {
+    type: "Experience",
+    company: "Duong Gia Phat Trading Co., Ltd.",
+    position: "SEO Specialist",
+    timeline: "Jun 2024 - Oct 2024",
+    location: "Ho Chi Minh City, Vietnam",
+    summary:
+      "Analyzed search performance, keyword demand, and market signals to turn SEO data into practical business insights.",
+    impacts: [
+      "Improved SEO visibility through keyword and search performance analysis",
+      "Identified user behavior patterns from Google Search Console data",
+      "Supported optimization decisions with market and content insights",
+    ],
+    skills: [
+      "Google Search Console",
+      "Keyword Research",
+      "SEO Analysis",
+      "Market Research",
+    ],
+    link: "https://www.linkedin.com/in/xuanvan/",
+    icon: SearchCheck,
+  },
+  {
+    type: "Project",
+    company: "E-commerce Website (ASP.NET Core MVC)",
+    position: "Technical Team Lead",
+    timeline: "Jan 2026 - Apr 2026",
+    location: "Ho Chi Minh City, Vietnam",
+    summary:
+      "Led technical coordination for an ASP.NET Core MVC e-commerce website with structured shopping flows and sandbox payment integrations.",
+    impacts: [
+      "Defined system scope, functional requirements, and non-functional requirements",
+      "Designed user flows for product browsing, cart, checkout, and payment journeys",
+      "Collaborated with developers to implement and test core e-commerce features",
+    ],
+    skills: [
+      "ASP.NET Core MVC",
+      "System Scope",
+      "User Flows",
+      "Payment APIs",
+    ],
+    link: "https://github.com/ngxuanvan/ReSip-Multi-Payment-E-Commerce",
+    icon: Code2,
+  },
+  {
+    type: "Project",
+    company: "E-commerce System Analysis & Design",
+    position: "Business Analyst",
+    timeline: "Aug 2025 - Dec 2025",
+    location: "Ho Chi Minh City, Vietnam",
+    summary:
+      "Analyzed manual sales operations and designed system workflows, diagrams, and data structures for an e-commerce solution.",
+    impacts: [
+      "Gathered and documented BRD and user stories through stakeholder analysis",
+      "Designed use case, activity, sequence, ERD, and system structure diagrams",
+      "Defined order management and checkout analysis for core e-commerce flows",
+    ],
+    skills: [
+      "BRD",
+      "User Stories",
+      "Use Case Diagram",
+      "ERD",
+    ],
+    link: "/ba/ecommerce-system-analysis.pdf",
+    icon: Code2,
+  },
+  {
+    type: "Project",
+    company: "E-commerce Website (dochoimohinh.com.vn)",
+    position: "Team Lead (BA & WordPress)",
+    timeline: "Aug 2023 - Dec 2023",
+    location: "Ho Chi Minh City, Vietnam",
+    summary:
+      "Led business analysis and WordPress implementation for an e-commerce website shaped by market and competitor research.",
+    impacts: [
+      "Conducted market and competitor analysis to identify e-commerce opportunities",
+      "Defined key website features based on business needs and user behavior",
+      "Proposed improvements to increase engagement and conversion potential",
+    ],
+    skills: [
+      "WordPress",
+      "Market Analysis",
+      "Competitor Analysis",
+      "User Behavior",
+    ],
+    link: "https://dochoimohinh.com.vn/",
+    icon: ShoppingBag,
+  },
+];
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"]
-  });
-  const yParallax1 = useTransform(scrollYProgress, [0, 1], [-150, 150]);
-  const yParallax2 = useTransform(scrollYProgress, [0, 1], [150, -150]);
-
-  const experienceItems: ShowcaseItem[] = [
-    {
-      category: "EXPERIENCE",
-      title: "DUONG GIA PHAT TRADING AND TRADING CI., LTD.",
-      role: "SEO Specialist",
-      companyOrClient: "Marketing Tools",
-      location: "Ho Chi Minh City, Vietnam",
-      period: "06/2024 - 10/2024",
-      summary: "Analyzed SEO performance and market signals to uncover user behavior patterns, business opportunities, and website improvement directions.",
-      problem: "The business needed clearer visibility into search behavior, keyword demand, and how SEO performance could better support broader business goals.",
-      approach: "Used Google Search Console, keyword research, and market analysis to identify patterns, monitor performance, and connect findings with content and website optimization.",
-      impact: "Generated practical, data-driven insights that supported stronger visibility, better website performance, and more aligned optimization decisions.",
-      link: "https://www.linkedin.com/in/xuanvan/",
-      icon: Briefcase,
-      gradient: "from-primary to-primary-light",
-      metrics: [
-        { label: "Role", value: "SEO", color: "blue" },
-        { label: "Focus", value: "Analysis", color: "purple" },
-        { label: "Period", value: "4 Months", color: "pink" }
-      ],
-      tech: ["Google Search Console", "Keyword Research", "Market Research", "Performance Analysis"],
-      tags: ["EXPERIENCE", "SEO", "BA"]
-    }
-  ];
-
-  const projectItems: ShowcaseItem[] = [
-    {
-      category: "PROJECT",
-      title: "E-commerce Website (ASP.NET Core MVC) - dotnet.resip.io.vn",
-      role: "Team Leader",
-      companyOrClient: "dotnet.resip.io.vn",
-      location: "Ho Chi Minh City, Vietnam",
-      period: "01/2026 - 04/2026",
-      summary: "Team-led e-commerce project built with ASP.NET Core MVC, where I contributed to requirement gathering, user flow definition, and feature coordination from analysis to testing.",
-      problem: "The website needed clear functional requirements for core shopping flows such as product browsing, cart handling, checkout, and sandbox payment integration.",
-      approach: "Gathered and documented requirements through user stories and BRD notes, defined system functions, designed key user flows, and worked closely with the development team during implementation and testing.",
-      impact: "Created a clearer foundation for development, improved alignment between business needs and system features, and supported a more complete e-commerce experience.",
-      link: "https://github.com/ngxuanvan/ReSip-Multi-Payment-E-Commerce",
-      icon: MonitorSmartphone,
-      gradient: "from-primary via-primary-light to-primary",
-      metrics: [
-        { label: "Role", value: "Leader", color: "blue" },
-        { label: "Stack", value: "ASP.NET", color: "purple" },
-        { label: "Focus", value: "Requirements", color: "pink" }
-      ],
-      tech: ["ASP.NET Core MVC", "User Stories", "BRD", "VNPAY / MoMo / PayPal"],
-      tags: ["ASP.NET", "REQUIREMENTS", "TEAM LEAD"]
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.14,
     },
-    {
-      category: "PROJECT",
-      title: "E-commerce Website - dochoimohinh.com.vn",
-      role: "Team Leader",
-      companyOrClient: "dochoimohinh.com.vn",
-      location: "Ho Chi Minh City, Vietnam",
-      period: "08/2023 - 12/2023",
-      summary: "Team-led WordPress e-commerce project focused on market analysis, requirement understanding, and building a structured online store around real business needs.",
-      problem: "The project needed better understanding of market opportunities, user expectations, and website features that could support an effective e-commerce experience.",
-      approach: "Performed market and competitor analysis, gathered user requirements, translated business needs into functional website features, and led implementation and deployment on WordPress.",
-      impact: "Delivered a more structured and user-friendly storefront, while identifying performance improvement directions to support engagement and conversion potential.",
-      link: "https://dochoimohinh.com.vn/",
-      icon: ShoppingBag,
-      gradient: "from-primary-light via-primary to-primary-light",
-      metrics: [
-        { label: "Platform", value: "WordPress", color: "pink" },
-        { label: "Role", value: "Leader", color: "blue" },
-        { label: "Focus", value: "Analysis", color: "purple" }
-      ],
-      tech: ["Market Analysis", "Competitor Analysis", "WordPress", "Functional Features"],
-      tags: ["WORDPRESS", "ANALYSIS", "ECOMMERCE"]
-    }
-  ];
+  },
+};
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      setMousePosition({
-        x: ((e.clientX - rect.left) / rect.width - 0.5) * 20,
-        y: ((e.clientY - rect.top) / rect.height - 0.5) * 20
-      });
-    };
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
+const experienceItems = items.filter((item) => item.type === "Experience");
+const projectItems = items.filter((item) => item.type === "Project");
 
-  const renderCard = (item: ShowcaseItem, index: number) => (
-    <motion.div
-      key={`${item.category}-${item.title}`}
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group"
-      onMouseEnter={() => setActiveIndex(index)}
-      onMouseLeave={() => setActiveIndex(null)}
+const WorkCard = ({
+  item,
+  index,
+}: {
+  item: PortfolioItem;
+  index: number;
+}) => {
+  const Icon = item.icon;
+
+  return (
+    <motion.article
+      key={item.company}
+      variants={cardVariants}
+      className="group relative"
     >
-      <div
-        className={`
-          relative rounded-3xl overflow-hidden
-          transform transition-all duration-500 ease-out
-          ${activeIndex === index ? 'scale-[1.02]' : 'scale-100'}
-        `}
+      <a
+        href={item.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block rounded-[1.75rem] border border-border/80 bg-card/90 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur transition-all duration-500 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_28px_90px_rgba(37,99,235,0.14)] md:p-8 dark:shadow-[0_24px_80px_rgba(0,0,0,0.22)]"
       >
-        <div className="relative overflow-hidden bg-card/80 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-border/50 hover:bg-card hover:border-primary-light/30 transition-all duration-300">
-          <div
-            className={`
-              absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${item.gradient}
-              transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-700 ease-out
-            `}
-          />
-
-          <div className="relative">
-            <div className="flex flex-col gap-6 mb-8 lg:flex-row lg:items-start lg:justify-between">
-              <div className="flex items-start gap-4">
-                <a href={item.link} target="_blank" rel="noopener noreferrer" className="block">
-                  <div
-                    className={`
-                      text-4xl w-16 h-16 rounded-2xl bg-gradient-to-br ${item.gradient}
-                      flex items-center justify-center shadow-md transform -rotate-6
-                      group-hover:rotate-0 transition-transform duration-500 cursor-pointer
-                    `}
-                  >
-                    <item.icon className="w-8 h-8 text-white transform group-hover:scale-110 transition-transform duration-500" />
-                  </div>
-                </a>
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-sm font-mono text-primary">
-                      {(index + 1).toString().padStart(2, '0')}
-                    </span>
-                    <span className="w-8 h-px bg-gradient-to-r from-primary to-primary-light" />
-                    <span className="text-xs text-subtext font-mono">{item.category}</span>
-                  </div>
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block mb-3 text-xs uppercase tracking-[0.25em] text-subtext hover:text-primary transition-colors"
-                  >
-                    {item.companyOrClient}
-                  </a>
-                  <h3 className="text-2xl lg:text-4xl font-bold text-foreground tracking-tight">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 text-lg font-semibold text-primary">{item.role}</p>
-                </div>
-              </div>
-
-              <div className="lg:text-right">
-                <p className="text-sm font-medium text-foreground whitespace-nowrap">{item.location}</p>
-                <p className="text-sm text-subtext mt-1">{item.period}</p>
-              </div>
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+          <div className="flex min-w-0 items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border bg-background text-primary shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-primary/30 group-hover:bg-primary/10">
+              <Icon className="h-5 w-5" />
             </div>
 
-            <p className="text-lg text-foreground mb-10 pl-6 border-l-4 border-primary font-light">
-              {item.summary}
-            </p>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10">
-              {item.metrics.map((metric) => (
-                <div
-                  key={`${item.title}-${metric.label}`}
-                  className="relative bg-border/30 rounded-xl p-4 overflow-hidden group/metric"
-                >
-                  <div
-                    className={`
-                      absolute inset-0 bg-gradient-to-r ${item.gradient} opacity-0
-                      group-hover/metric:opacity-10 transition-opacity duration-500
-                    `}
-                  />
-                  <div className="relative">
-                    <div className="text-xs text-subtext mb-1 font-mono">{metric.label}</div>
-                    <div className="text-2xl font-bold text-primary">{metric.value}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-light" />
-                  <span className="text-xs font-mono text-primary tracking-wider">PROBLEM</span>
-                </div>
-                <p className="text-sm leading-relaxed text-foreground">{item.problem}</p>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span className="text-xs font-mono text-primary tracking-wider">APPROACH</span>
-                </div>
-                <p className="text-sm leading-relaxed text-foreground">{item.approach}</p>
-              </div>
-
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-light" />
-                  <span className="text-xs font-mono text-primary tracking-wider">IMPACT</span>
-                </div>
-                <p className="text-sm leading-relaxed text-foreground">{item.impact}</p>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-2">
-              {item.tech.map((tech) => (
-                <span
-                  key={`${item.title}-${tech}`}
-                  className="px-3 py-1 text-xs font-semibold text-primary bg-primary/10 rounded-full border border-primary-light/20"
-                >
-                  {tech}
+            <div className="min-w-0">
+              <div className="mb-2 flex flex-wrap items-center gap-2">
+                <span className="rounded-full bg-primary/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-[0.16em] text-primary">
+                  {item.type}
                 </span>
-              ))}
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between gap-4">
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs text-subtext font-mono hover:text-foreground transition-colors"
-              >
-                VIEW DETAILS →
-              </a>
-              <div className="flex flex-wrap justify-end gap-2">
-                {item.tags.map((tag) => (
-                  <span
-                    key={`${item.title}-${tag}`}
-                    className="text-[10px] px-2 py-1 rounded-full bg-border/40 text-subtext font-mono"
-                  >
-                    {tag}
-                  </span>
-                ))}
+                <span className="font-mono text-xs text-subtext">
+                  0{index + 1}
+                </span>
               </div>
+
+              <h3 className="text-2xl font-black tracking-tight text-foreground md:text-3xl">
+                {item.company}
+              </h3>
+              <p className="mt-1 text-base font-semibold text-subtext">
+                {item.position}
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-2 text-sm text-subtext sm:grid-cols-2 lg:min-w-64 lg:grid-cols-1 lg:text-right">
+            <div className="flex items-center gap-2 lg:justify-end">
+              <CalendarDays className="h-4 w-4 text-primary" />
+              <span>{item.timeline}</span>
+            </div>
+            <div className="flex items-center gap-2 lg:justify-end">
+              <MapPin className="h-4 w-4 text-primary" />
+              <span>{item.location}</span>
             </div>
           </div>
         </div>
-      </div>
-    </motion.div>
-  );
 
+        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start">
+          <p className="max-w-2xl text-base leading-8 text-foreground md:text-lg">
+            {item.summary}
+          </p>
+
+          <ul className="space-y-3">
+            {item.impacts.map((impact) => (
+              <li
+                key={impact}
+                className="flex gap-3 text-sm leading-6 text-subtext md:text-base"
+              >
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                <span>{impact}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="mt-8 flex flex-wrap gap-2.5">
+          {item.skills.map((skill) => (
+            <span
+              key={`${item.company}-${skill}`}
+              className="rounded-full border border-border/70 bg-background/80 px-3.5 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 group-hover:border-primary/20 group-hover:bg-primary/10 group-hover:text-primary"
+            >
+              {skill}
+            </span>
+          ))}
+        </div>
+      </a>
+    </motion.article>
+  );
+};
+
+const WorkGroup = ({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) => (
+  <div>
+    <div className="mb-6 flex items-center gap-4">
+      <span className="h-px w-12 bg-gradient-to-r from-primary to-primary-light" />
+      <h3 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
+        {title}
+      </h3>
+    </div>
+
+    <div className="space-y-6 md:space-y-8">{children}</div>
+  </div>
+);
+
+const ProjectsSection: React.FC = () => {
   return (
     <section
-      ref={sectionRef}
       id="projects"
-      className="relative py-16 md:py-20 px-6 overflow-hidden bg-gradient-to-b from-background via-card to-background"
+      className="relative overflow-hidden bg-gradient-to-b from-background via-card to-background px-4 py-20 sm:px-6 md:py-28"
     >
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-40 -left-20 w-96 h-96 bg-primary/20 rounded-full blur-[100px] animate-pulse"
-          style={{ x: mousePosition.x, y: yParallax1 }}
-        />
-        <motion.div
-          className="absolute bottom-40 -right-20 w-96 h-96 bg-primary-light/20 rounded-full blur-[100px] animate-pulse"
-          style={{ x: -mousePosition.x, y: yParallax2 }}
-        />
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgba(37, 99, 235, 0.06) 1px, transparent 0)`,
-            backgroundSize: '50px 50px'
-          }}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
+      <div className="relative z-10 mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 text-center"
+          viewport={{ once: true, amount: 0.35 }}
+          transition={{ duration: 0.55 }}
+          className="mb-14 text-center md:mb-16"
         >
-          <div className="inline-block mb-4">
-            <span className="text-xs font-mono tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary uppercase animate-pulse">
-              • Experience & Projects •
+          <div className="mb-4 inline-block">
+            <span className="text-xs font-mono uppercase tracking-[0.3em] text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary-light to-primary">
+              Experience & Projects
             </span>
           </div>
 
-          <h2 className="text-5xl sm:text-7xl font-black text-foreground mb-6 tracking-tight">
+          <h2 className="text-4xl font-black tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Experience
-            <span className="relative inline-block ml-4 text-primary-dark">& Projects</span>
+            <span className="relative ml-3 inline-block text-primary-dark">
+              & Projects
+            </span>
           </h2>
 
-          <p className="text-subtext text-lg max-w-3xl mx-auto font-light">
-            Hands-on experience and selected e-commerce projects presented through role, context, and contribution.
+          <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-subtext md:text-lg">
+            Hands-on experience and selected e-commerce projects presented
+            through role, context, and contribution.
           </p>
         </motion.div>
-
-        <div className="mb-8">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="w-12 h-px bg-gradient-to-r from-primary to-primary-light" />
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground">Experience</h3>
-          </div>
-          <div className="space-y-8">
-            {experienceItems.map((item, index) => renderCard(item, index))}
-          </div>
-        </div>
-
-        <div className="mt-16">
-          <div className="flex items-center gap-4 mb-8">
-            <span className="w-12 h-px bg-gradient-to-r from-primary to-primary-light" />
-            <h3 className="text-2xl md:text-3xl font-bold text-foreground">Projects</h3>
-          </div>
-          <div className="space-y-8 lg:space-y-12">
-            {projectItems.map((item, index) => renderCard(item, experienceItems.length + index))}
-          </div>
-        </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="mt-24 text-center"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.12 }}
+          className="relative"
         >
-          <div className="inline-block group/cursor">
-            <div className="relative">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary via-primary-light to-primary rounded-full blur opacity-30 group-hover/cursor:opacity-100 transition duration-1000" />
-              <a
-                href="https://github.com/ngxuanvan"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="relative px-8 py-4 bg-card rounded-full text-foreground font-mono text-sm tracking-wider border border-border hover:border-transparent transition-all duration-500 inline-block"
-              >
-                <span className="relative z-10 flex items-center gap-3">
-                  <span>MORE ON GITHUB</span>
-                  <span className="text-lg transform group-hover/cursor:translate-x-1 transition-transform">
-                    →
-                  </span>
-                </span>
-              </a>
-            </div>
-          </div>
+          <div className="space-y-14 md:space-y-16">
+            <WorkGroup title="Experience">
+              {experienceItems.map((item, index) => (
+                <WorkCard key={item.company} item={item} index={index} />
+              ))}
+            </WorkGroup>
 
-          <p className="mt-8 text-xs text-subtext font-mono tracking-[0.3em]">
-            • EXPERIENCE • REQUIREMENTS • USER FLOW • E-COMMERCE •
-          </p>
+            <WorkGroup title="Projects">
+              {projectItems.map((item, index) => (
+                <WorkCard
+                  key={item.company}
+                  item={item}
+                  index={index}
+                />
+              ))}
+            </WorkGroup>
+          </div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes gradient {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-        .animate-gradient {
-          animation: gradient 3s ease infinite;
-        }
-      `}</style>
     </section>
   );
 };
