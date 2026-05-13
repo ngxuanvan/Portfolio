@@ -37,10 +37,8 @@ const items: PortfolioItem[] = [
     type: "Experience",
     company: "Duong Gia Phat Trading Co., Ltd.",
     position: "SEO Specialist",
-    timeline: "Jun 2024 - Oct 2024",
+    timeline: "06/2024 - 10/2024",
     location: "Ho Chi Minh City, Vietnam",
-    summary:
-      "Analyzed search performance, keyword demand, and market signals to turn SEO data into practical business insights.",
     impacts: [
       "Improved SEO visibility through keyword and search performance analysis",
       "Identified user behavior patterns from Google Search Console data",
