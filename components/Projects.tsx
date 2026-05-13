@@ -23,6 +23,7 @@ type PortfolioItem = {
   summary?: string;
   link?: string;
   linkLabel?: string;
+  linkVariant?: "default" | "primary";
   liveDemo?: string;
   impacts: string[];
   skills: string[];
@@ -120,6 +121,8 @@ const items: PortfolioItem[] = [
       "User Behavior",
     ],
     link: "https://dochoimohinh.com.vn/",
+    linkLabel: "Live Demo",
+    linkVariant: "primary",
     icon: ShoppingBag,
   },
 ];
@@ -266,7 +269,11 @@ const WorkCard = ({
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
+                className={
+                  item.linkVariant === "primary"
+                    ? "inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/20"
+                    : "inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
+                }
               >
                 {item.linkLabel ?? "View Detail"}
                 <ArrowUpRight className="h-4 w-4" />
