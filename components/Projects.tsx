@@ -100,6 +100,7 @@ const items: PortfolioItem[] = [
       "ERD",
     ],
     link: "https://www.nxvan.com/ba/ecommerce-system-analysis.pdf",
+    linkLabel: "View Report",
     icon: Code2,
   },
   {
