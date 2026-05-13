@@ -105,7 +105,7 @@ const items: PortfolioItem[] = [
   },
   {
     type: "Project",
-    company: "E-commerce Website (dochoimohinh.com.vn)",
+    company: "WordPress E-Commerce Website",
     position: "Team Lead (BA & WordPress)",
     timeline: "08/2023 - 12/2023",
     location: "Ho Chi Minh City, Vietnam",
