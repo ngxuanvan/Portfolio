@@ -18,7 +18,7 @@ type PortfolioItem = {
   position: string;
   timeline: string;
   location: string;
-  summary: string;
+  summary?: string;
   impacts: string[];
   skills: string[];
   link: string;
@@ -50,16 +50,16 @@ const items: PortfolioItem[] = [
   },
   {
     type: "Project",
-    company: "E-commerce Website (ASP.NET Core MVC)",
+    company: "E-COMMERCE WEBSITE (ASP.NET CORE MVC)",
     position: "Technical Team Lead",
-    timeline: "Jan 2026 - Apr 2026",
+    timeline: "01/2026 - 04/2026",
     location: "Ho Chi Minh City, Vietnam",
-    summary:
-      "Led technical coordination for an ASP.NET Core MVC e-commerce website with structured shopping flows and sandbox payment integrations.",
     impacts: [
-      "Defined system scope, functional requirements, and non-functional requirements",
-      "Designed user flows for product browsing, cart, checkout, and payment journeys",
-      "Collaborated with developers to implement and test core e-commerce features",
+      "Participated in developing an e-commerce website using ASP.NET Core MVC",
+      "Defined system scope and functionalities, including functional and non-functional requirements",
+      "Designed user flows for key features such as product browsing, cart, and checkout",
+      "Integrated payment gateways (VNPay, MoMo, PayPal) using API in sandbox environment",
+      "Collaborated with the development team to implement and test system features",
     ],
     skills: [
       "ASP.NET Core MVC",
@@ -72,16 +72,16 @@ const items: PortfolioItem[] = [
   },
   {
     type: "Project",
-    company: "E-commerce System Analysis & Design",
+    company: "E-COMMERCE SYSTEM ANALYSIS & DESIGN",
     position: "Business Analyst",
-    timeline: "Aug 2025 - Dec 2025",
+    timeline: "08/2025 - 12/2025",
     location: "Ho Chi Minh City, Vietnam",
-    summary:
-      "Analyzed manual sales operations and designed system workflows, diagrams, and data structures for an e-commerce solution.",
     impacts: [
-      "Gathered and documented BRD and user stories through stakeholder analysis",
-      "Designed use case, activity, sequence, ERD, and system structure diagrams",
-      "Defined order management and checkout analysis for core e-commerce flows",
+      "Analyzed current business process and identified key issues in manual sales operations",
+      "Gathered and documented requirements (BRD, User Stories) through stakeholder analysis",
+      "Designed system workflows using Use Case, Activity, and Sequence diagrams",
+      "Developed ERD and system structure to support core e-commerce functionalities",
+      "Responsible for order management and checkout-related analysis and diagrams",
     ],
     skills: [
       "BRD",
@@ -89,21 +89,20 @@ const items: PortfolioItem[] = [
       "Use Case Diagram",
       "ERD",
     ],
-    link: "/ba/ecommerce-system-analysis.pdf",
+    link: "https://www.nxvan.com/ba/ecommerce-system-analysis.pdf",
     icon: Code2,
   },
   {
     type: "Project",
-    company: "E-commerce Website (dochoimohinh.com.vn)",
+    company: "E-COMMERCE WEBSITE (dochoimohinh.com.vn)",
     position: "Team Lead (BA & WordPress)",
-    timeline: "Aug 2023 - Dec 2023",
+    timeline: "08/2023 - 12/2023",
     location: "Ho Chi Minh City, Vietnam",
-    summary:
-      "Led business analysis and WordPress implementation for an e-commerce website shaped by market and competitor research.",
     impacts: [
-      "Conducted market and competitor analysis to identify e-commerce opportunities",
-      "Defined key website features based on business needs and user behavior",
-      "Proposed improvements to increase engagement and conversion potential",
+      "Conducted market & competitor analysis to identify e-commerce opportunities.",
+      "Defined key website features based on business needs.",
+      "Led WordPress website implementation and deployment.",
+      "Analyzed user behavior data and proposed improvements to increase engagement and conversion.",
     ],
     skills: [
       "WordPress",
@@ -191,10 +190,18 @@ const WorkCard = ({
           </div>
         </div>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start">
-          <p className="max-w-2xl text-base leading-8 text-foreground md:text-lg">
-            {item.summary}
-          </p>
+        <div
+          className={
+            item.summary
+              ? "mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start"
+              : "mt-8"
+          }
+        >
+          {item.summary && (
+            <p className="max-w-2xl text-base leading-8 text-foreground md:text-lg">
+              {item.summary}
+            </p>
+          )}
 
           <ul className="space-y-3">
             {item.impacts.map((impact) => (
