@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image, { type StaticImageData } from "next/image";
 import { motion, type Variants } from "framer-motion";
 import {
   ArrowUpRight,
@@ -11,6 +12,7 @@ import {
   SearchCheck,
   ShoppingBag,
 } from "lucide-react";
+import dotnetResipEpayment from "../dotnet_resip_epayment.png";
 
 type PortfolioItem = {
   type: "Experience" | "Project";
@@ -20,8 +22,12 @@ type PortfolioItem = {
   location: string;
   summary?: string;
   link?: string;
+  linkLabel?: string;
+  liveDemo?: string;
   impacts: string[];
   skills: string[];
+  previewImage?: StaticImageData;
+  previewAlt?: string;
   icon: React.ComponentType<{ className?: string }>;
 };
 
@@ -62,11 +68,15 @@ const items: PortfolioItem[] = [
     ],
     skills: [
       "ASP.NET Core MVC",
-      "System Scope",
+      "Process Analysis",
       "User Flows",
-      "Payment APIs",
+      "Payment Integration",
     ],
     link: "https://github.com/ngxuanvan/ReSip-Multi-Payment-E-Commerce",
+    linkLabel: "View Project",
+    liveDemo: "https://dotnet.resip.io.vn/",
+    previewImage: dotnetResipEpayment,
+    previewAlt: "ReSip multi-payment e-commerce payment interface",
     icon: Code2,
   },
   {
@@ -191,52 +201,89 @@ const WorkCard = ({
 
         <div
           className={
-            item.summary
-              ? "mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start"
+            item.summary || item.previewImage
+              ? "mt-8 grid gap-8 lg:grid-cols-[minmax(0,0.92fr)_minmax(440px,0.78fr)] lg:items-start"
               : "mt-8"
           }
         >
-          {item.summary && (
-            <p className="max-w-2xl text-base leading-8 text-foreground md:text-lg">
-              {item.summary}
-            </p>
+          <div>
+            {item.summary && (
+              <p className="mb-6 max-w-2xl text-base leading-8 text-foreground md:text-lg">
+                {item.summary}
+              </p>
+            )}
+
+            <ul className="space-y-3">
+              {item.impacts.map((impact) => (
+                <li
+                  key={impact}
+                  className="flex gap-3 text-sm leading-6 text-subtext md:text-base"
+                >
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                  <span>{impact}</span>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-7 flex flex-wrap gap-2.5">
+              {item.skills.map((skill) => (
+                <span
+                  key={`${item.company}-${skill}`}
+                  className="rounded-full border border-border/70 bg-background/80 px-3.5 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 group-hover:border-primary/20 group-hover:bg-primary/10 group-hover:text-primary"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {item.previewImage && (
+            <div className="relative overflow-hidden rounded-2xl border border-border/80 bg-white shadow-[0_18px_60px_rgba(15,23,42,0.12)] ring-1 ring-white/70 transition-all duration-500 group-hover:shadow-[0_24px_80px_rgba(37,99,235,0.16)] dark:bg-slate-950 dark:ring-white/5">
+              <div className="flex h-9 items-center gap-1.5 border-b border-border/70 bg-background/80 px-4">
+                <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
+                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
+                <span className="ml-2 h-2 w-24 rounded-full bg-border/70" />
+              </div>
+
+              <div className="bg-white p-2 dark:bg-slate-950">
+                <Image
+                  src={item.previewImage}
+                  alt={item.previewAlt ?? item.company}
+                  sizes="(min-width: 1280px) 520px, (min-width: 1024px) 44vw, 100vw"
+                  quality={100}
+                  className="h-auto w-full rounded-xl object-contain transition-transform duration-500 group-hover:scale-[1.015]"
+                />
+              </div>
+            </div>
           )}
+        </div>
 
-          <ul className="space-y-3">
-            {item.impacts.map((impact) => (
-              <li
-                key={impact}
-                className="flex gap-3 text-sm leading-6 text-subtext md:text-base"
+        {(item.link || item.liveDemo) && (
+          <div className="mt-8 flex flex-wrap justify-end gap-3">
+            {item.link && (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
               >
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                <span>{impact}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+                {item.linkLabel ?? "View Detail"}
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
 
-        <div className="mt-8 flex flex-wrap gap-2.5">
-          {item.skills.map((skill) => (
-            <span
-              key={`${item.company}-${skill}`}
-              className="rounded-full border border-border/70 bg-background/80 px-3.5 py-2 text-xs font-semibold text-foreground shadow-sm transition-all duration-300 group-hover:border-primary/20 group-hover:bg-primary/10 group-hover:text-primary"
-            >
-              {skill}
-            </span>
-          ))}
-        </div>
-
-        {item.link && (
-          <div className="mt-8 flex justify-end">
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
-            >
-              View Detail
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+            {item.liveDemo && (
+              <a
+                href={item.liveDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary-dark hover:shadow-lg hover:shadow-primary/20"
+              >
+                Live Demo
+                <ArrowUpRight className="h-4 w-4" />
+              </a>
+            )}
           </div>
         )}
       </div>
@@ -267,11 +314,11 @@ const ProjectsSection: React.FC = () => {
   return (
     <section
       id="projects"
-      className="relative overflow-hidden bg-gradient-to-b from-background via-card to-background px-4 py-20 sm:px-6 md:py-28"
+      className="relative overflow-hidden bg-gradient-to-b from-background via-card to-background px-6 py-20 md:py-28"
     >
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
-      <div className="relative z-10 mx-auto max-w-6xl">
+      <div className="relative z-10 mx-auto max-w-7xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
