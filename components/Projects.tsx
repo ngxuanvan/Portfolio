@@ -41,6 +41,7 @@ const items: PortfolioItem[] = [
     location: "Ho Chi Minh City, Vietnam",
     impacts: [
       "Improved SEO visibility through keyword and search performance analysis",
+      "Conducted keyword research to identify search trends and content opportunities",
       "Identified user behavior patterns from Google Search Console data",
       "Supported optimization decisions with market and content insights",
     ],
