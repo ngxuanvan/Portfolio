@@ -16,6 +16,12 @@ export default function Certificates() {
       alt: 'What is Business Analysis certificate',
       credentialUrl: 'https://www.linkedin.com/learning/certificates/22d7f1fa3235aadd9b46dc4aca0e526198e9c70098ebee219efbe5656641f088?trk=share_certificate',
     },
+    {
+      id: 2,
+      src: '/Certificate_Business_Analyst_and_Project_Manager Collaboration.jpeg',
+      alt: 'Business Analyst and Project Manager Collaboration certificate',
+      credentialUrl: 'https://www.linkedin.com/learning/certificates/be1bbc7ee2a4458cc56f38ccc56119c7c98e7e50401b9aa47bf59330d97f59fd?trk=share_certificate',
+    },
   ];
 
   const handlePrevious = () => {
@@ -70,7 +76,7 @@ export default function Certificates() {
         </motion.div>
 
         {/* Certificate Grid */}
-        <div className="grid grid-cols-1 max-w-xl mx-auto gap-4 md:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-4 md:gap-6">
           {certificates.map((cert, index) => (
             <motion.div
               key={cert.id}
@@ -85,7 +91,7 @@ export default function Certificates() {
               
               {/* Certificate card */}
               <div className="relative rounded-2xl overflow-hidden bg-card/80 backdrop-blur-sm border border-border/50 hover:border-primary-light/50 transition-colors duration-300">
-                <div className="relative aspect-[1280/800]">
+                <div className="relative aspect-[1280/989]">
                   <Image
                     src={cert.src}
                     alt={cert.alt}
@@ -171,13 +177,13 @@ export default function Certificates() {
             <div className="h-0.5 rounded-t-2xl bg-gradient-to-r from-primary via-primary-light to-primary" />
 
             {/* Certificate image */}
-            <div className="relative aspect-[1280/800] max-h-[calc(100vh-7.5rem)] min-h-0 overflow-hidden rounded-b-2xl bg-card border border-border/50">
+            <div className="relative aspect-[1280/989] max-h-[calc(100vh-7.5rem)] min-h-0 overflow-hidden rounded-b-2xl bg-card border border-border/50">
               <Image
                 src={certificates[selectedImage].src}
                 alt={certificates[selectedImage].alt}
                 fill
                 sizes="(min-width: 1024px) 1024px, calc(100vw - 32px)"
-                className="object-cover object-top"
+                className="object-contain object-center"
                 priority
               />
             </div>
