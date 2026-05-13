@@ -3,6 +3,7 @@
 import React from "react";
 import { motion, type Variants } from "framer-motion";
 import {
+  ArrowUpRight,
   CalendarDays,
   CheckCircle2,
   Code2,
@@ -152,12 +153,7 @@ const WorkCard = ({
       variants={cardVariants}
       className="group relative"
     >
-      <a
-        href={item.link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block rounded-[1.75rem] border border-border/80 bg-card/90 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur transition-all duration-500 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_28px_90px_rgba(37,99,235,0.14)] md:p-8 dark:shadow-[0_24px_80px_rgba(0,0,0,0.22)]"
-      >
+      <div className="rounded-[1.75rem] border border-border/80 bg-card/90 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)] backdrop-blur transition-all duration-500 group-hover:-translate-y-1 group-hover:border-primary/25 group-hover:shadow-[0_28px_90px_rgba(37,99,235,0.14)] md:p-8 dark:shadow-[0_24px_80px_rgba(0,0,0,0.22)]">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
           <div className="flex min-w-0 items-start gap-4">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-border bg-background text-primary shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-primary/30 group-hover:bg-primary/10">
@@ -223,7 +219,19 @@ const WorkCard = ({
             </span>
           ))}
         </div>
-      </a>
+
+        <div className="mt-8 flex justify-end">
+          <a
+            href={item.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-2.5 text-sm font-semibold text-foreground shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:bg-primary/10 hover:text-primary hover:shadow-lg hover:shadow-primary/10"
+          >
+            View Detail
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
+        </div>
+      </div>
     </motion.article>
   );
 };
