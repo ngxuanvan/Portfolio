@@ -68,7 +68,7 @@ const items: PortfolioItem[] = [
     ],
     skills: [
       "ASP.NET Core MVC",
-      "Process Analysis",
+      "SQL Server",
       "User Flows",
       "Payment Integration",
     ],
