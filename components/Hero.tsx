@@ -6,6 +6,7 @@ import {
     Briefcase,
     BarChart3,
     BookOpen,
+    Github,
     Linkedin,
     Mail,
     ClipboardList,
@@ -49,6 +50,7 @@ export default function HeroSection() {
 
     const socialLinks = [
         { icon: Linkedin, href: 'https://www.linkedin.com/in/xuanvan/', label: 'LinkedIn', color: 'from-primary to-primary' },
+        { icon: Github, href: 'https://github.com/ngxuanvan', label: 'GitHub', color: 'from-primary to-primary-light' },
         { icon: Mail, href: 'mailto:nguyenxuanvan.work@gmail.com', label: 'Email', color: 'from-primary-light to-primary-light' },
     ]
 
