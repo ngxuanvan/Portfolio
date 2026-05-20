@@ -10,7 +10,6 @@ import {
   Code2,
   MapPin,
   SearchCheck,
-  ShoppingBag,
 } from "lucide-react";
 import dotnetResipEpayment from "../dotnet_resip_epayment.png";
 
@@ -101,29 +100,6 @@ const items: PortfolioItem[] = [
     link: "https://www.nxvan.com/ba/ecommerce-system-analysis.pdf",
     linkLabel: "View Report",
     icon: Code2,
-  },
-  {
-    type: "Project",
-    company: "WordPress E-Commerce Website",
-    position: "Team Lead (BA & WordPress)",
-    timeline: "08/2023 - 12/2023",
-    location: "Ho Chi Minh City, Vietnam",
-    impacts: [
-      "Conducted market & competitor analysis to identify e-commerce opportunities.",
-      "Defined key website features based on business needs.",
-      "Led WordPress website implementation and deployment.",
-      "Analyzed user behavior data and proposed improvements to increase engagement and conversion.",
-    ],
-    skills: [
-      "WordPress",
-      "Market Analysis",
-      "Competitor Analysis",
-      "User Behavior",
-    ],
-    link: "https://dochoimohinh.com.vn/",
-    linkLabel: "Live Demo",
-    linkVariant: "primary",
-    icon: ShoppingBag,
   },
 ];
 
